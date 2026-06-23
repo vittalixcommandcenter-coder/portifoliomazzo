@@ -176,6 +176,7 @@ export const projects: Project[] = [
       "Redes e comunicação em tempo real aplicadas em software",
     ],
     stack: ["WebRTC", "React", "Node.js", "CI/CD"],
+    url: "https://pulsevoice.com.br",
     icon: AudioLines,
     accent: "amber",
   },
