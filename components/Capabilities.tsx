@@ -24,9 +24,9 @@ export default function Capabilities() {
     <section id="stack" className="relative px-6 py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Stack & Capacidades"
-          title="Engenharia robusta, produto sofisticado"
-          description="Da camada de infraestrutura ao pixel final — domino o ciclo completo de criação de um produto digital."
+          eyebrow="Matriz de Competências"
+          title="Stack de um desenvolvedor full-stack moderno"
+          description="Do banco de dados e da orquestração por IA à segurança de borda — domino o ciclo completo de criação de um produto SaaS."
         />
 
         {/* Grid de capacidades */}

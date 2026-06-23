@@ -16,25 +16,30 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Guilherme Mazzo — Founder & CEO da Vittalix",
+  metadataBase: new URL("https://mazzo.vittalix.com.br"),
+  title: "Guilherme Mazzo — Desenvolvedor Full-Stack & SaaS",
   description:
-    "Founder & CEO da Vittalix. Especialista em Infraestrutura de TI, VoIP e desenvolvimento de ecossistemas SaaS com IA para saúde, governo e serviços.",
+    "Desenvolvedor Full-Stack e fundador da Vittalix. Criação de ecossistemas SaaS complexos, PWAs mobile-first e soluções automatizadas, com orquestração por IA. Criador do ProntuIA.",
   keywords: [
     "Guilherme Mazzo",
-    "Vittalix",
-    "Infraestrutura de TI",
-    "VoIP",
+    "Desenvolvedor Full-Stack",
     "SaaS",
-    "IA",
-    "Desenvolvimento de Software",
+    "PWA",
+    "ProntuIA",
+    "Vittalix",
+    "Orquestração por IA",
+    "Supabase",
+    "Next.js",
+    "WebRTC",
   ],
-  authors: [{ name: "Guilherme Augusto Mazzo" }],
+  authors: [{ name: "Guilherme Augusto Mazzo de Oliveira" }],
   openGraph: {
-    title: "Guilherme Mazzo — Founder & CEO da Vittalix",
+    title: "Guilherme Mazzo — Desenvolvedor Full-Stack & SaaS",
     description:
-      "Especialista em Infraestrutura de TI, VoIP e desenvolvimento de ecossistemas SaaS com IA.",
+      "Ecossistemas SaaS complexos, PWAs mobile-first e soluções automatizadas, com orquestração por IA. Criador do ProntuIA.",
     type: "website",
     locale: "pt_BR",
+    url: "https://mazzo.vittalix.com.br",
   },
 };
 

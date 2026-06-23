@@ -1,25 +1,24 @@
 import {
   Car,
-  LayoutDashboard,
   FileSignature,
   Stethoscope,
   AudioLines,
   Scissors,
-  Building2,
   Boxes,
   BrainCircuit,
   Cloud,
   Code2,
-  Cpu,
   Database,
   GitBranch,
   Layers,
   Network,
   Palette,
-  PhoneCall,
-  Server,
+  Radio,
   ShieldCheck,
+  Smartphone,
+  Sparkles,
   Workflow,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -29,17 +28,21 @@ import {
  * ------------------------------------------------------------------ */
 
 export const profile = {
-  name: "Guilherme Augusto Mazzo",
+  name: "Guilherme Augusto Mazzo de Oliveira",
   shortName: "Guilherme Mazzo",
-  title:
-    "Founder & CEO da Vittalix | Especialista em Infraestrutura de TI, VoIP e Desenvolvimento SaaS com IA.",
-  // Coloque sua foto em /public/profile.jpg (já apontado abaixo).
+  role: "Desenvolvedor Full-Stack & Fundador da Vittalix",
+  // Pitch principal exibido no Hero
+  pitch:
+    "Desenvolvedor Full-Stack focado na criação de ecossistemas SaaS complexos, aplicações mobile-first (PWAs) e soluções automatizadas de ponta a ponta.",
+  // Diferencial estratégico (subtexto)
+  differentiator:
+    "Especialista em orquestração de software acelerada por IA, unindo arquiteturas modernas de dados a uma sólida bagagem de infraestrutura de rede, segurança de borda e comunicação em tempo real.",
+  // Coloque sua foto em /public/profile.jpg
   photo: "/profile.jpg",
   photoFallback: "/profile.svg",
   // Coloque seu currículo em /public/cv.pdf
   cv: "/cv.pdf",
-  about:
-    "Especialista em Infraestrutura de TI e VoIP em transição focada para o empreendedorismo, a orquestração de IA e o desenvolvimento de ecossistemas SaaS de alto impacto. Atuo na ponte entre a engenharia de comunicação robusta e produtos digitais sofisticados, criando soluções sob medida para diferentes nichos — saúde, governo e serviços automotivos.",
+  site: "https://mazzo.vittalix.com.br",
 };
 
 export const socials = {
@@ -48,11 +51,21 @@ export const socials = {
   email: "guilhermazzo@gmail.com",
 };
 
+/* Texto da seção "Sobre" */
+export const about = {
+  lead: "Eu construo ecossistemas SaaS completos — do banco de dados ao pixel final.",
+  paragraphs: [
+    "Sou desenvolvedor Full-Stack e fundador da Vittalix, onde projeto e desenvolvo plataformas SaaS complexas, PWAs mobile-first e soluções automatizadas de ponta a ponta. Meu trabalho vai da modelagem de dados e da arquitetura de backend até interfaces com padrão visual premium e fluxos sem atrito.",
+    "Meu diferencial é a orquestração de software acelerada por IA: combino plataformas de desenvolvimento assistido e LLMs em produção com uma base de engenharia sólida para entregar produtos completos com velocidade e qualidade.",
+    "Antes do desenvolvimento, atuei profundamente com infraestrutura de redes e comunicação em tempo real. Não me posiciono como profissional de telecom — mas essa bagagem virou um diferencial técnico real: entendo latência, concorrência de pacotes, segurança de borda e alta disponibilidade num nível que poucos desenvolvedores alcançam.",
+  ],
+};
+
 /* Estatísticas rápidas exibidas no Hero */
 export const stats = [
-  { value: "7+", label: "Plataformas SaaS construídas" },
-  { value: "3", label: "Nichos atendidos: saúde, gov, serviços" },
-  { value: "100%", label: "Da infraestrutura ao produto final" },
+  { value: "5+", label: "Plataformas SaaS desenvolvidas" },
+  { value: "4", label: "Mercados: saúde, gov, fintech, comunicação" },
+  { value: "Full-Stack", label: "Do banco de dados ao deploy" },
 ];
 
 /* Ticker de tecnologias que roda no Hero */
@@ -60,66 +73,58 @@ export const techMarquee = [
   "React",
   "Next.js",
   "TypeScript",
-  "Node.js",
-  "Tailwind CSS",
-  "WebRTC",
-  "PostgreSQL",
-  "Orquestração de IA",
-  "VoIP / SIP",
-  "Grandstream",
   "PWA",
-  "Asterisk / UCM",
-  "Branding",
-  "Cloudflare",
+  "Supabase",
+  "PostgreSQL",
+  "Row Level Security",
+  "Cloudflare Pages",
+  "Cloudflare Workers",
+  "WebRTC",
+  "Gemini API",
+  "Mistral AI",
+  "Orquestração por IA",
+  "Automação orientada a eventos",
 ];
 
-export type Experience = {
-  role: string;
-  company: string;
-  period: string;
-  current?: boolean;
-  description: string;
-  highlights: string[];
-  tags: string[];
+/* ------------------------------------------------------------------ *
+ * PROJETO CARRO-CHEFE — ProntuIA
+ * ------------------------------------------------------------------ */
+export const flagship = {
+  name: "ProntuIA",
+  url: "https://prontuia.com.br",
+  category: "HealthTech · SaaS Premium",
+  tagline: "Telemedicina e gestão clínica de alto nível",
+  description:
+    "Um ecossistema SaaS completo e premium para a gestão integrada de clínicas médicas e profissionais de saúde. Une prontuário, agenda, atendimento digital e telemedicina em tempo real numa experiência fluida, rápida e sem atrito — pensada para lidar com informações sensíveis com performance e integridade.",
+  highlights: [
+    {
+      title: "Modelagem de dados sensíveis",
+      text: "Estruturação complexa de banco relacional com foco em performance e integridade de dados clínicos.",
+    },
+    {
+      title: "UI/UX padrão premium",
+      text: "Interfaces refinadas que garantem fluxos rápidos e sem atrito para profissionais de saúde.",
+    },
+    {
+      title: "Telemedicina em tempo real",
+      text: "Integração de ferramentas clínicas e módulos de atendimento digital por vídeo.",
+    },
+  ],
+  stack: ["Next.js", "TypeScript", "Supabase", "WebRTC", "Row Level Security"],
 };
 
-export const experiences: Experience[] = [
-  {
-    role: "Founder & CEO",
-    company: "Vittalix",
-    period: "Atualmente",
-    current: true,
-    description:
-      "Fundei a Vittalix para transformar conhecimento técnico profundo em produtos digitais sofisticados. Lidero a estratégia, a arquitetura e a identidade visual de um portfólio inteiro de plataformas SaaS exclusivas.",
-    highlights: [
-      "Direção de produto e arquitetura de ponta a ponta em múltiplos SaaS",
-      "Orquestração de IA aplicada a casos de uso reais (orçamentos, análise, automação)",
-      "Branding e identidade visual coesa entre todos os produtos",
-    ],
-    tags: ["SaaS", "IA", "Branding", "Liderança", "Produto", "Arquitetura"],
-  },
-  {
-    role: "Especialista em Infraestrutura de TI e VoIP",
-    company: "Trajetória técnica",
-    period: "Base de carreira",
-    description:
-      "Anos operando comunicação crítica e infraestrutura de alta disponibilidade. Essa base de engenharia robusta é o que sustenta a confiabilidade dos produtos que construo hoje.",
-    highlights: [
-      "Implantação e gestão de URAs, SIP trunks e roteamento de chamadas",
-      "Operação de sistemas Grandstream, SaperX e UCM em ambientes críticos",
-      "Redes, telefonia IP e troubleshooting de comunicação em produção",
-    ],
-    tags: ["VoIP", "SIP Trunk", "URA", "Grandstream", "UCM", "SaperX", "Redes"],
-  },
-];
-
+/* ------------------------------------------------------------------ *
+ * GALERIA DE PROJETOS
+ * (ProntuIA também entra no topo, com featured: true)
+ * ------------------------------------------------------------------ */
 export type Project = {
   name: string;
   tagline: string;
   category: string;
   description: string;
-  features: string[];
+  focus: string[];
   stack: string[];
+  url?: string;
   icon: LucideIcon;
   accent: "amber" | "emerald";
   featured?: boolean;
@@ -127,122 +132,88 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "Auto Pro",
-    tagline: "Gestão inteligente para funilarias",
-    category: "IA · Automotivo",
-    description:
-      "ERP completo para funilarias que usa IA para acelerar o que mais consome tempo no setor: avaliar avarias e montar orçamentos. A oficina fotografa o dano, a IA analisa e o sistema gera o orçamento — enquanto o financeiro, o pátio e os clientes ficam todos sob controle em um só lugar.",
-    features: [
-      "IA para análise de avarias a partir de fotos do veículo",
-      "Geração automática de orçamentos a partir do laudo",
-      "Gestão de caixa, fluxo financeiro e fechamento diário",
-      "Controle de pátio: entrada, etapas de reparo e saída",
-      "Cadastro e histórico completo de clientes e veículos",
-    ],
-    stack: ["React", "Node.js", "IA / Visão", "PostgreSQL"],
-    icon: Car,
-    accent: "amber",
-    featured: true,
-  },
-  {
-    name: "Command Center",
-    tagline: "O cockpit interno da operação",
-    category: "Workspace · Produtividade",
-    description:
-      "Plataforma de gestão interna no espírito do Monday.com, mas desenhada para um time de tecnologia. Centraliza projetos, segredos e infraestrutura num único painel — incluindo um cofre de senhas e o controle de todas as chaves de API de IA usadas pelos produtos.",
-    features: [
-      "Quadros e gestão de projetos no estilo Monday.com",
-      "Gerador de diagramas para arquitetura e fluxos",
-      "Cofre de senhas com gerenciamento de credenciais",
-      "Painel central de chaves de APIs de IA",
-    ],
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Cloudflare"],
-    icon: LayoutDashboard,
-    accent: "emerald",
-  },
-  {
-    name: "Protocolia",
-    tagline: "GovTech para prefeituras",
-    category: "Governo · Documentos",
-    description:
-      "Sistema para a administração pública que moderniza o protocolo municipal: documentos deixam de circular em papel e passam a ser digitalizados, rastreados e assinados eletronicamente, com trilha de auditoria do início ao fim.",
-    features: [
-      "Gestão e tramitação de protocolos municipais",
-      "Digitalização e organização de documentos",
-      "Integração com assinatura digital",
-      "Rastreabilidade e trilha de auditoria",
-    ],
-    stack: ["React", "Node.js", "Assinatura Digital", "PostgreSQL"],
-    icon: FileSignature,
-    accent: "amber",
-  },
-  {
     name: "ProntuIA",
-    tagline: "Clínicas e telemedicina premium",
-    category: "HealthTech · SaaS",
+    tagline: "Telemedicina e gestão clínica de alto nível",
+    category: "HealthTech · SaaS Premium",
     description:
-      "SaaS premium para gestão de clínicas e telemedicina, onde a experiência importa tanto quanto a função. Une prontuário, agenda, atendimento por vídeo e automações em uma interface refinada, pensada para reduzir cliques e elevar a percepção de qualidade da clínica.",
-    features: [
-      "Gestão completa de clínicas e prontuário eletrônico",
-      "Telemedicina com atendimento por vídeo",
-      "Automação de fluxos e rotinas administrativas",
-      "UI/UX refinada, com foco em experiência do profissional",
+      "Ecossistema SaaS premium para gestão integrada de clínicas e profissionais de saúde, com telemedicina em tempo real, prontuário e UI/UX refinada para dados sensíveis.",
+    focus: [
+      "Modelagem de banco relacional para dados clínicos sensíveis",
+      "Interfaces premium com fluxos rápidos e sem atrito",
+      "Telemedicina e atendimento digital em tempo real",
     ],
-    stack: ["Next.js", "TypeScript", "WebRTC", "Automação"],
+    stack: ["Next.js", "TypeScript", "Supabase", "WebRTC"],
+    url: "https://prontuia.com.br",
     icon: Stethoscope,
     accent: "emerald",
     featured: true,
   },
   {
-    name: "Pulse Voice",
-    tagline: "Áudio de alta fidelidade para gamers",
-    category: "WebRTC · Real-time",
+    name: "AutoPro",
+    tagline: "Automação de processos e escala comercial",
+    category: "MarTech · Automação",
     description:
-      "Plataforma de comunicação por voz via WebRTC pensada para o público gamer, onde latência e qualidade de áudio são tudo. Aproveita minha base em VoIP para entregar conversas em alta fidelidade — incluindo o desenvolvimento do site oficial da marca.",
-    features: [
-      "Comunicação de voz em tempo real via WebRTC",
-      "Áudio de alta fidelidade com baixa latência",
-      "Experiência sob medida para comunidades gamer",
-      "Site oficial e identidade da plataforma",
+      "Engenharia de software voltada à automação de tarefas repetitivas e a fluxos de trabalho inteligentes orientados a eventos, com integração massiva de APIs para engajamento e escala de negócios.",
+    focus: [
+      "Fluxos de trabalho inteligentes orientados a eventos",
+      "Automação de tarefas repetitivas em escala",
+      "Integração massiva de APIs de terceiros",
     ],
-    stack: ["WebRTC", "React", "Node.js", "Áudio HD"],
+    stack: ["Node.js", "Automação", "Integração de APIs", "Supabase"],
+    url: "https://autopro.vittalix.com.br",
+    icon: Workflow,
+    accent: "amber",
+  },
+  {
+    name: "Pulse Voice",
+    tagline: "Áudio em tempo real para gamers",
+    category: "Real-Time Audio · WebRTC",
+    description:
+      "Plataforma de comunicação por voz para o público gamer com implementação avançada de WebRTC para áudio de alta fidelidade e baixa latência — onde minha bagagem de redes vira código moderno. Com pipeline de releases e deploy contínuo via GitHub.",
+    focus: [
+      "WebRTC para áudio de alta fidelidade e baixa latência",
+      "Automação de releases e CI/CD via GitHub",
+      "Redes e comunicação em tempo real aplicadas em software",
+    ],
+    stack: ["WebRTC", "React", "Node.js", "CI/CD"],
     icon: AudioLines,
     accent: "amber",
   },
   {
     name: "ZeroCut",
-    tagline: "Barbearias na palma da mão",
-    category: "PWA · Serviços",
+    tagline: "Gestão mobile-first para barbearias",
+    category: "FinTech · PWA",
     description:
-      "Sistema PWA para barbearias que funciona como app sem precisar de loja: instala direto do navegador. Concentra agenda, estoque e pagamentos para que o barbeiro foque no cliente, não na planilha.",
-    features: [
-      "PWA instalável, com experiência de app nativo",
-      "Agenda de horários e gestão de atendimentos",
-      "Controle de estoque de produtos",
-      "Pagamentos integrados",
+      "PWA otimizado para dispositivos móveis com agendamentos em tempo real, controle rígido de inventário e módulos de fluxo financeiro e pagamentos — experiência de app nativo direto do navegador.",
+    focus: [
+      "PWA mobile-first instalável, com cara de app nativo",
+      "Agendamentos em tempo real e controle de inventário",
+      "Fluxo financeiro e pagamentos integrados",
     ],
     stack: ["PWA", "React", "Service Workers", "Pagamentos"],
     icon: Scissors,
     accent: "emerald",
   },
   {
-    name: "Vittalix",
-    tagline: "A casa da marca",
-    category: "Institucional · Branding",
+    name: "Protocolia",
+    tagline: "Gestão eletrônica de documentos públicos",
+    category: "GovTech · GED",
     description:
-      "Site institucional e plataforma da minha própria empresa de tecnologia e branding — o ponto de encontro entre todos os produtos. É onde a identidade visual do ecossistema é apresentada e onde os SaaS se conectam sob uma marca única.",
-    features: [
-      "Identidade visual e branding do ecossistema",
-      "Vitrine institucional dos produtos",
-      "Ponto de entrada para as plataformas Vittalix",
+      "Arquitetura de software para sistemas governamentais focada em auditoria de documentos municipais e conformidade com regras complexas de processos licitatórios.",
+    focus: [
+      "Gestão eletrônica de documentos (GED) municipais",
+      "Trilha de auditoria e conformidade de processos",
+      "Regras complexas de fluxos licitatórios",
     ],
-    stack: ["Next.js", "Tailwind CSS", "Framer Motion", "Branding"],
-    icon: Building2,
+    stack: ["React", "Node.js", "PostgreSQL", "Assinatura Digital"],
+    icon: FileSignature,
     accent: "amber",
   },
 ];
 
-/* Áreas de atuação técnica (seção Stack & Capacidades) */
+/* ------------------------------------------------------------------ *
+ * MATRIZ DE COMPETÊNCIAS (seção Stack)
+ * ------------------------------------------------------------------ */
 export type Capability = {
   title: string;
   description: string;
@@ -252,45 +223,45 @@ export type Capability = {
 
 export const capabilities: Capability[] = [
   {
-    title: "Desenvolvimento Full-Stack",
+    title: "Core Development",
     description:
-      "Produtos do front ao back: React, Next.js, TypeScript e Node.js com UI/UX cuidada.",
+      "Engenharia Full-Stack, PWAs robustos e aplicações com foco absoluto na experiência mobile.",
     icon: Code2,
     accent: "amber",
   },
   {
-    title: "Orquestração de IA",
+    title: "Orquestração por IA (SDLC acelerado)",
     description:
-      "Integração de IA em fluxos reais — análise, geração de conteúdo e automação de processos.",
+      "Desenvolvimento acelerado por IA e engenharia de prompts para entregar produtos completos com velocidade e qualidade.",
     icon: BrainCircuit,
     accent: "emerald",
   },
   {
-    title: "Infraestrutura & VoIP",
+    title: "Modelos Inteligentes em produção",
     description:
-      "SIP trunks, URAs, Grandstream, UCM e redes — comunicação crítica de alta disponibilidade.",
-    icon: PhoneCall,
+      "Consumo e implementação de LLMs em nível de produção com Gemini API e Mistral AI.",
+    icon: Sparkles,
     accent: "amber",
   },
   {
-    title: "Arquitetura SaaS",
+    title: "Backend & BaaS",
     description:
-      "Multi-tenant, escalabilidade e estrutura de dados pensadas para crescer com segurança.",
-    icon: Layers,
+      "Modelagem relacional, dados assíncronos, autenticação e segurança (Row Level Security) com Supabase.",
+    icon: Database,
     accent: "emerald",
   },
   {
-    title: "Branding & Design",
+    title: "Cloud, Borda & Redes",
     description:
-      "Identidade visual coesa e interfaces sofisticadas que elevam a percepção do produto.",
-    icon: Palette,
+      "Segurança de borda, otimização de tráfego, roteamento, CDN e gestão de domínios/SSL com Cloudflare (Pages/Workers).",
+    icon: Cloud,
     accent: "amber",
   },
   {
-    title: "Cloud & Deploy",
+    title: "Comunicação em Tempo Real",
     description:
-      "Cloudflare, ambientes de produção e pipelines de entrega contínua.",
-    icon: Cloud,
+      "WebRTC e baixa latência sustentados por entendimento profundo de redes, concorrência de pacotes e protocolos.",
+    icon: Radio,
     accent: "emerald",
   },
 ];
@@ -300,24 +271,31 @@ export const techStack: { name: string; icon: LucideIcon }[] = [
   { name: "React", icon: Code2 },
   { name: "Next.js", icon: Layers },
   { name: "TypeScript", icon: Code2 },
-  { name: "Node.js", icon: Server },
-  { name: "Tailwind", icon: Palette },
+  { name: "PWA", icon: Smartphone },
+  { name: "Supabase", icon: Database },
   { name: "PostgreSQL", icon: Database },
-  { name: "WebRTC", icon: AudioLines },
-  { name: "VoIP / SIP", icon: PhoneCall },
-  { name: "IA", icon: Cpu },
-  { name: "Automação", icon: Workflow },
   { name: "Cloudflare", icon: Cloud },
-  { name: "Git", icon: GitBranch },
-  { name: "Redes", icon: Network },
-  { name: "Segurança", icon: ShieldCheck },
-  { name: "PWA", icon: Boxes },
+  { name: "Gemini API", icon: Sparkles },
+  { name: "Mistral AI", icon: BrainCircuit },
+  { name: "WebRTC", icon: AudioLines },
+  { name: "Automação", icon: Workflow },
+  { name: "CI/CD", icon: GitBranch },
+  { name: "Segurança de Borda", icon: ShieldCheck },
+  { name: "Redes / RTC", icon: Network },
+  { name: "Performance", icon: Zap },
 ];
+
+/* Bagagem de fundação (rebaixada a diferencial) — usada na seção Sobre */
+export const foundation = {
+  title: "Fundação de rede & telecom",
+  text: "Profundo entendimento de redes, latência, concorrência de pacotes e protocolos de comunicação em tempo real — derivado de experiência com VoIP, troncos SIP, URAs e ecossistemas Grandstream, SaperX e UCM. Hoje, isso é um diferencial técnico dentro do meu trabalho como desenvolvedor.",
+  tags: ["VoIP", "SIP Trunk", "URA", "Grandstream", "SaperX", "UCM", "Alta disponibilidade"],
+};
 
 export const navLinks = [
   { label: "Sobre", href: "#sobre" },
-  { label: "Stack", href: "#stack" },
-  { label: "Experiência", href: "#experiencia" },
+  { label: "ProntuIA", href: "#prontuia" },
   { label: "Projetos", href: "#projetos" },
+  { label: "Stack", href: "#stack" },
   { label: "Contato", href: "#contato" },
 ];

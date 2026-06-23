@@ -1,6 +1,6 @@
 import About from "@/components/About";
 import Capabilities from "@/components/Capabilities";
-import Experience from "@/components/Experience";
+import Flagship from "@/components/Flagship";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
@@ -13,9 +13,9 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <Capabilities />
-        <Experience />
+        <Flagship />
         <Projects />
+        <Capabilities />
       </main>
       <Footer />
     </>

@@ -61,9 +61,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mt-6 font-display text-4xl font-bold leading-[1.04] tracking-tight text-ash-100 sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              Guilherme
+              Guilherme Mazzo
               <br />
-              <span className="text-gradient">Mazzo</span>
+              <span className="text-gradient">Dev Full-Stack & SaaS</span>
             </motion.h1>
 
             <motion.p
@@ -72,11 +72,8 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-ash-300 md:mx-0 md:text-lg"
             >
-              <span className="font-semibold text-ash-100">
-                Founder &amp; CEO da Vittalix.
-              </span>{" "}
-              Da engenharia de Infraestrutura de TI e VoIP à construção de
-              ecossistemas SaaS com IA para saúde, governo e serviços.
+              {profile.pitch}{" "}
+              <span className="text-ash-400">{profile.differentiator}</span>
             </motion.p>
 
             <motion.div
@@ -131,8 +128,8 @@ export default function Hero() {
                 </div>
               </div>
               <div className="glass-strong absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold text-ash-100 shadow-lg shadow-black/40">
-                <span className="text-emerald-soft">●</span> Founder &amp; CEO @
-                Vittalix
+                <span className="text-emerald-soft">●</span> Full-Stack · Fundador
+                da Vittalix
               </div>
             </div>
           </motion.div>

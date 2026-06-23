@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import TiltCard from "./TiltCard";
 import { projects, type Project } from "@/lib/data";
@@ -49,6 +49,27 @@ function StackRow({ project }: { project: Project }) {
   );
 }
 
+function VisitLink({ project }: { project: Project }) {
+  if (!project.url) return null;
+  const isEmerald = project.accent === "emerald";
+  const host = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${
+        isEmerald
+          ? "text-emerald-soft hover:text-emerald"
+          : "text-amber-soft hover:text-amber"
+      }`}
+    >
+      <ExternalLink size={13} />
+      {host}
+    </a>
+  );
+}
+
 /* Card grande, em destaque (ocupa 2 colunas no desktop) */
 function FeaturedCard({ project }: { project: Project }) {
   const Icon = project.icon;
@@ -57,7 +78,6 @@ function FeaturedCard({ project }: { project: Project }) {
   return (
     <TiltCard glow={project.accent} className="h-full">
       <article className="border-glow glass relative flex h-full flex-col gap-6 overflow-hidden rounded-2xl p-7 md:flex-row md:p-8">
-        {/* brilho de fundo no card destaque */}
         <div
           aria-hidden
           className={`pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full blur-3xl ${
@@ -86,18 +106,18 @@ function FeaturedCard({ project }: { project: Project }) {
           <p className="mt-4 text-sm leading-relaxed text-ash-400 md:text-base">
             {project.description}
           </p>
-          <div className="mt-5">
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
             <StackRow project={project} />
+            <VisitLink project={project} />
           </div>
         </div>
 
-        {/* Lista de features sempre visível no card destaque */}
         <div className="relative w-full shrink-0 border-t border-white/[0.06] pt-5 md:w-64 md:border-l md:border-t-0 md:pl-7 md:pt-0">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-ash-500">
-            Principais recursos
+            Foco técnico
           </span>
           <ul className="mt-3 space-y-2.5">
-            {project.features.map((f) => (
+            {project.focus.map((f) => (
               <li key={f} className="flex items-start gap-2.5 text-sm text-ash-300">
                 <Check
                   size={15}
@@ -113,7 +133,7 @@ function FeaturedCard({ project }: { project: Project }) {
   );
 }
 
-/* Card padrão — features revelam no hover */
+/* Card padrão */
 function StandardCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const isEmerald = project.accent === "emerald";
@@ -154,9 +174,8 @@ function StandardCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
-        {/* Features condensadas (2 primeiras) */}
         <ul className="mt-4 space-y-1.5">
-          {project.features.slice(0, 2).map((f) => (
+          {project.focus.slice(0, 2).map((f) => (
             <li key={f} className="flex items-start gap-2 text-xs text-ash-400">
               <Check
                 size={13}
@@ -167,9 +186,14 @@ function StandardCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-5 border-t border-white/[0.05] pt-4">
+        <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/[0.05] pt-4">
           <StackRow project={project} />
         </div>
+        {project.url && (
+          <div className="mt-3">
+            <VisitLink project={project} />
+          </div>
+        )}
       </article>
     </TiltCard>
   );
@@ -180,9 +204,9 @@ export default function Projects() {
     <section id="projetos" className="relative px-6 py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Portfólio"
+          eyebrow="Ecossistema"
           title="Projetos Desenvolvidos"
-          description="Ecossistemas SaaS e plataformas sob medida — cada um resolvendo um problema real de um nicho específico."
+          description="SaaS multinicho construído de ponta a ponta — cada plataforma resolve uma regra de negócio real em um mercado diferente."
         />
 
         <motion.div
