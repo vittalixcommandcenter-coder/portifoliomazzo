@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply bg-obsidian-950 text-ash-200 font-sans antialiased;
+    /* Textura sutil + brilho ambiente para fugir do "chapado" */
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, rgba(245, 158, 11, 0.06), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 20%, rgba(16, 185, 129, 0.05), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-amber/30 text-ash-100;
+  }
+}
+
+@layer components {
+  /* Glassmorphism reutilizável */
+  .glass {
+    @apply border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl;
+  }
+
+  .glass-strong {
+    @apply border border-white/[0.08] bg-obsidian-900/70 backdrop-blur-2xl;
+  }
+
+  /* Texto com gradiente âmbar -> esmeralda (sem azul/roxo) */
+  .text-gradient {
+    @apply bg-gradient-to-r from-amber-soft via-amber to-emerald-soft bg-clip-text text-transparent;
+  }
+
+  /* Borda viva animada para chips/cards de destaque */
+  .accent-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-amber/50 to-transparent;
+  }
+}
+
+/* Scrollbar discreta no tema escuro */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #272b30;
+  border-radius: 9999px;
+  border: 2px solid #0a0a0b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3f45;
+}
+
+/* Respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
