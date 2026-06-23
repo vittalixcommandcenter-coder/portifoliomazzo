@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Stethoscope } from "lucide-react";
+import { ArrowUpRight, Check, Star, Stethoscope } from "lucide-react";
 import Reveal from "./Reveal";
 import { flagship } from "@/lib/data";
 
@@ -10,13 +10,24 @@ export default function Flagship() {
     <section id="prontuia" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <span className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.3em] text-copper">
-            <span className="h-1 w-1 rounded-full bg-copper" />
-            Projeto carro-chefe
-          </span>
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-copper/30 bg-copper/[0.08] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-copper-soft">
+                <Star size={12} className="fill-copper-soft text-copper-soft" />
+                Carro-chefe
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-semibold tracking-tightest text-platinum-gradient sm:text-4xl">
+                O produto que define o meu trabalho
+              </h2>
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-platinum-400">
+              O ProntuIA reúne tudo o que faço de melhor: arquitetura de dados,
+              tempo real e UI/UX premium em um único SaaS.
+            </p>
+          </div>
         </Reveal>
 
-        <div className="relative mt-7 overflow-hidden rounded-[2rem]">
+        <div className="relative mt-9 overflow-hidden rounded-[2rem]">
           {/* halo de luz com toque de cobre */}
           <div
             aria-hidden
