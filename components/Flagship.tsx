@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Reveal from "./Reveal";
+import ProntuiaDemo from "./demo/ProntuiaDemo";
 import { flagship } from "@/lib/data";
 
 // Ícone por recurso (mesma ordem do array em data.ts)
@@ -147,9 +148,34 @@ export default function Flagship() {
           </div>
         </div>
 
+        {/* Demo interativo */}
+        <Reveal>
+          <div className="mt-12 flex items-center gap-2.5">
+            <span className="rounded-full border border-copper/30 bg-copper/[0.08] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-copper-soft">
+              Experimente
+            </span>
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
+              Demonstração interativa
+            </p>
+          </div>
+          <h3 className="mt-4 max-w-xl font-display text-2xl font-semibold tracking-tightest text-platinum-gradient sm:text-3xl">
+            Não acredite — interaja com o produto
+          </h3>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-platinum-400">
+            Uma recriação navegável do ProntuIA com dados fictícios. Explore o
+            painel, o prontuário, a teleconsulta e rode o Co-Piloto de IA.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mt-6">
+            <ProntuiaDemo />
+          </div>
+        </Reveal>
+
         {/* Grade de recursos premium */}
         <Reveal>
-          <p className="mt-12 text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
+          <p className="mt-16 text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
             Recursos que diferenciam
           </p>
         </Reveal>
