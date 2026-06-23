@@ -76,7 +76,19 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${spaceGrotesk.variable} dark`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Anti-flash: aplica o tema salvo antes da primeira pintura */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';var r=document.documentElement;r.classList.toggle('light',t==='light');r.classList.toggle('dark',t!=='light');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,6 +1,11 @@
 import type { Config } from "tailwindcss";
 
+/* Cores baseadas em CSS variables -> permitem tema claro/escuro
+   trocando as variáveis em :root e .light. Use com /opacity normalmente. */
+const withVar = (v: string) => `rgb(var(${v}) / <alpha-value>)`;
+
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,34 +14,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base grafite profunda (quase-preto, levemente fria)
+        // Superfícies (fundo, cartões)
         graphite: {
-          950: "#08090a",
-          900: "#0c0d0f",
-          850: "#101113",
-          800: "#15171a",
-          700: "#1c1f23",
-          600: "#26292e",
-          500: "#34383e",
+          950: withVar("--c-bg"),
+          900: withVar("--c-surface"),
+          850: withVar("--c-surface-2"),
+          800: withVar("--c-surface-3"),
+          700: withVar("--c-surface-4"),
+          600: withVar("--c-surface-5"),
+          500: withVar("--c-surface-6"),
         },
-        // Texto / superfícies em platina (off-white frio -> prata)
+        // Texto (do mais forte ao mais fraco)
         platinum: {
-          50: "#f6f7f8",
-          100: "#eceef0",
-          200: "#d7dadd",
-          300: "#b3b8bd",
-          400: "#8a9095",
-          500: "#5f656b",
-          600: "#41464b",
+          50: withVar("--c-text-0"),
+          100: withVar("--c-text-1"),
+          200: withVar("--c-text-2"),
+          300: withVar("--c-text-3"),
+          400: withVar("--c-text-4"),
+          500: withVar("--c-text-5"),
+          600: withVar("--c-text-6"),
         },
-        // Acento único: branco-gelo (luz). Usado com extrema parcimônia.
-        ice: "#f5f5f7",
-        // Acento de cor: cobre / terracota (sóbrio, terroso, marcante)
+        ice: withVar("--c-ice"),
+        // Acento cobre (igual nos dois temas, com leve ajuste de tom)
         copper: {
-          DEFAULT: "#c47a52",
-          soft: "#d99873",
-          deep: "#a8623e",
-          glow: "rgba(196, 122, 82, 0.4)",
+          DEFAULT: withVar("--c-copper"),
+          soft: withVar("--c-copper-soft"),
+          deep: withVar("--c-copper-deep"),
         },
       },
       fontFamily: {
@@ -47,7 +50,6 @@ const config: Config = {
         tightest: "-0.045em",
       },
       boxShadow: {
-        // Sombras suaves, à la Apple (profundidade sem cor)
         soft: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 50px -20px rgba(0,0,0,0.7)",
         lift: "0 30px 80px -30px rgba(0,0,0,0.8)",
       },
@@ -56,14 +58,9 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        "fade-in": {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
       },
       animation: {
         float: "float 7s ease-in-out infinite",
-        "fade-in": "fade-in 1s ease forwards",
       },
     },
   },

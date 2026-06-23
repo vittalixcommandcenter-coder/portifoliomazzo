@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, socials } from "@/lib/data";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,21 +50,24 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href={`mailto:${socials.email}`}
-          className="hidden rounded-full bg-ice px-4 py-1.5 text-[13px] font-medium text-graphite-950 transition-colors hover:bg-white md:inline-block"
-        >
-          Contato
-        </a>
+        <div className="flex items-center gap-1.5">
+          <ThemeToggle />
+          <a
+            href={`mailto:${socials.email}`}
+            className="hidden rounded-full bg-copper px-4 py-1.5 text-[13px] font-medium text-graphite-950 transition-colors hover:bg-copper-soft md:inline-block"
+          >
+            Contato
+          </a>
 
-        {/* Mobile toggle */}
-        <button
-          aria-label="Abrir menu"
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-9 w-9 place-items-center rounded-full text-platinum-200 transition-colors hover:bg-white/[0.06] md:hidden"
-        >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
+          {/* Mobile toggle */}
+          <button
+            aria-label="Abrir menu"
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-9 w-9 place-items-center rounded-full text-platinum-200 transition-colors hover:bg-white/[0.06] md:hidden"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile drawer */}

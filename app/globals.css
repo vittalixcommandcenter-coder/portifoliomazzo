@@ -2,8 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Tema escuro (padrão) ---- */
 :root {
   color-scheme: dark;
+
+  --c-bg: 10 11 13;          /* #0a0b0d */
+  --c-surface: 12 13 15;
+  --c-surface-2: 16 17 19;
+  --c-surface-3: 21 23 26;
+  --c-surface-4: 28 31 35;
+  --c-surface-5: 38 41 46;
+  --c-surface-6: 52 56 62;
+
+  --c-text-0: 246 247 248;   /* platina mais clara */
+  --c-text-1: 236 238 240;
+  --c-text-2: 215 218 221;
+  --c-text-3: 179 184 189;
+  --c-text-4: 138 144 149;
+  --c-text-5: 95 101 107;
+  --c-text-6: 65 70 75;
+
+  --c-ice: 245 245 247;
+
+  --c-copper: 196 122 82;
+  --c-copper-soft: 217 152 115;
+  --c-copper-deep: 168 98 62;
+
+  /* tokens de superfície de vidro / bordas, dependentes de tema */
+  --glass-bg: 255 255 255;
+  --glass-bg-alpha: 0.025;
+  --glass-border: 255 255 255;
+  --glass-border-alpha: 0.07;
+  --hairline-alpha: 0.06;
+}
+
+/* ---- Tema claro ---- */
+.light {
+  color-scheme: light;
+
+  --c-bg: 244 244 243;       /* off-white quente */
+  --c-surface: 255 255 255;
+  --c-surface-2: 250 250 249;
+  --c-surface-3: 244 244 242;
+  --c-surface-4: 236 236 233;
+  --c-surface-5: 222 222 218;
+  --c-surface-6: 200 200 195;
+
+  --c-text-0: 23 24 26;      /* quase preto */
+  --c-text-1: 35 37 40;
+  --c-text-2: 52 55 59;
+  --c-text-3: 78 82 87;
+  --c-text-4: 108 113 119;
+  --c-text-5: 140 145 151;
+  --c-text-6: 175 179 184;
+
+  --c-ice: 23 24 26;         /* "ice" no claro = texto escuro forte */
+
+  --c-copper: 168 98 62;     /* cobre um tom mais escuro p/ contraste */
+  --c-copper-soft: 138 78 48;
+  --c-copper-deep: 110 60 36;
+
+  --glass-bg: 20 20 22;
+  --glass-bg-alpha: 0.02;
+  --glass-border: 20 20 22;
+  --glass-border-alpha: 0.1;
+  --hairline-alpha: 0.1;
 }
 
 html {
@@ -18,8 +81,7 @@ html {
     text-rendering: optimizeLegibility;
   }
 
-  /* Fundo calmo: halo de luz no topo + um toque quente de cobre
-     muito sutil, vinheta escura nas bordas. */
+  /* Fundo calmo: halo de luz no topo + toque quente de cobre. */
   body::before {
     content: "";
     position: fixed;
@@ -27,12 +89,12 @@ html {
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(60rem 38rem at 50% -12%, rgba(255, 255, 255, 0.045), transparent 60%),
-      radial-gradient(46rem 30rem at 80% 8%, rgba(196, 122, 82, 0.07), transparent 62%),
-      radial-gradient(50rem 40rem at 12% 92%, rgba(196, 122, 82, 0.05), transparent 60%);
+      radial-gradient(60rem 38rem at 50% -12%, rgb(var(--c-ice) / 0.045), transparent 60%),
+      radial-gradient(46rem 30rem at 80% 8%, rgb(var(--c-copper) / 0.07), transparent 62%),
+      radial-gradient(50rem 40rem at 12% 92%, rgb(var(--c-copper) / 0.05), transparent 60%);
   }
 
-  /* Vinheta sutil para focar o olhar no centro */
+  /* Vinheta sutil (só no tema escuro). */
   body::after {
     content: "";
     position: fixed;
@@ -41,9 +103,12 @@ html {
     pointer-events: none;
     box-shadow: inset 0 0 200px 40px rgba(0, 0, 0, 0.55);
   }
+  .light body::after {
+    box-shadow: none;
+  }
 
   ::selection {
-    @apply bg-platinum-100/20 text-ice;
+    @apply bg-copper/20 text-ice;
   }
 
   h1, h2, h3 {
@@ -52,15 +117,19 @@ html {
 }
 
 @layer components {
-  /* Vidro fosco discreto, estilo Apple — borda finíssima e luz superior */
+  /* Vidro fosco discreto, estilo Apple — adapta-se ao tema via variáveis */
   .glass {
-    @apply border border-white/[0.07] bg-white/[0.025] backdrop-blur-2xl;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+    background: rgb(var(--glass-bg) / var(--glass-bg-alpha));
+    @apply backdrop-blur-2xl;
+    box-shadow: inset 0 1px 0 0 rgb(var(--glass-bg) / 0.05);
   }
 
   .glass-strong {
-    @apply border border-white/[0.08] bg-graphite-900/60 backdrop-blur-2xl;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    border: 1px solid rgb(var(--glass-border) / 0.08);
+    background: rgb(var(--c-surface) / 0.6);
+    @apply backdrop-blur-2xl;
+    box-shadow: inset 0 1px 0 0 rgb(var(--glass-bg) / 0.06);
   }
 
   /* Botão primário: cobre (CTA com cor, sóbrio) */
@@ -71,12 +140,20 @@ html {
 
   /* Botão secundário: contorno de vidro */
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-medium text-platinum-200 backdrop-blur-xl transition-all duration-300 hover:border-copper/40 hover:bg-white/[0.06] hover:text-ice;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-platinum-200 backdrop-blur-xl transition-all duration-300 hover:border-copper/40 hover:text-ice;
+    border: 1px solid rgb(var(--glass-border) / 0.14);
+    background: rgb(var(--glass-bg) / 0.04);
   }
 
   /* Texto com leve brilho prata (para títulos de destaque) */
   .text-platinum-gradient {
-    @apply bg-gradient-to-b from-white via-platinum-100 to-platinum-400 bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to bottom,
+      rgb(var(--c-text-0)),
+      rgb(var(--c-text-1)),
+      rgb(var(--c-text-3))
+    );
+    @apply bg-clip-text text-transparent;
   }
 
   /* Texto com brilho de cobre (para palavras de destaque) */
@@ -86,19 +163,35 @@ html {
 
   /* Divisor fino quase invisível */
   .hairline {
-    @apply h-px w-full bg-white/[0.06];
+    height: 1px;
+    width: 100%;
+    background: rgb(var(--glass-border) / var(--hairline-alpha));
   }
 
-  /* Card que ganha um anel luminoso branco no hover (sutil) */
+  /* Card que ganha um anel luminoso no hover (sutil) */
   .ring-hover {
     @apply transition-colors duration-500;
   }
   .ring-hover:hover {
-    @apply border-white/[0.16];
+    border-color: rgb(var(--glass-border) / 0.16);
   }
 }
 
 @layer utilities {
+  /* Borda/superfície/divisor adaptáveis ao tema (substituem white/[x]) */
+  .border-line {
+    border-color: rgb(var(--glass-border) / 0.1);
+  }
+  .border-line-soft {
+    border-color: rgb(var(--glass-border) / 0.07);
+  }
+  .bg-tint {
+    background-color: rgb(var(--glass-bg) / 0.03);
+  }
+  .divide-line > * + * {
+    border-color: rgb(var(--glass-border) / 0.09);
+  }
+
   .mask-fade-x {
     -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);

@@ -95,7 +95,7 @@ export default function Flagship() {
                 {flagship.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-white/[0.08] px-3 py-1 text-xs font-medium text-platinum-400"
+                    className="rounded-full border border-line px-3 py-1 text-xs font-medium text-platinum-400"
                   >
                     {tech}
                   </span>

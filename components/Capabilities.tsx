@@ -58,7 +58,7 @@ export default function Capabilities() {
             {techStack.map((tech) => (
               <span
                 key={tech.name}
-                className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] px-3.5 py-2 text-sm text-platinum-400 transition-colors hover:border-copper/35 hover:text-ice"
+                className="inline-flex items-center gap-2 rounded-full border border-line-soft px-3.5 py-2 text-sm text-platinum-400 transition-colors hover:border-copper/35 hover:text-ice"
               >
                 <tech.icon size={14} className="text-copper/80" />
                 {tech.name}

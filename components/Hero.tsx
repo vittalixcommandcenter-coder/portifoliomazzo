@@ -56,7 +56,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.025] px-3.5 py-1.5 text-[12px] font-medium text-platinum-400 backdrop-blur-xl"
+          className="mt-7 inline-flex items-center gap-2 rounded-full border border-line bg-tint px-3.5 py-1.5 text-[12px] font-medium text-platinum-400 backdrop-blur-xl"
         >
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-copper opacity-75" />
@@ -118,7 +118,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55, ease }}
-          className="mt-14 flex w-full max-w-2xl flex-wrap items-stretch justify-center divide-x divide-white/[0.07]"
+          className="mt-14 flex w-full max-w-2xl flex-wrap items-stretch justify-center divide-x divide-line"
         >
           {stats.map((s) => (
             <div key={s.label} className="px-6 py-2 text-center sm:px-8">
@@ -143,7 +143,7 @@ export default function Hero() {
         {heroChips.map((chip) => (
           <span
             key={chip}
-            className="rounded-full border border-white/[0.06] px-3 py-1 text-xs font-medium text-platinum-500"
+            className="rounded-full border border-line-soft px-3 py-1 text-xs font-medium text-platinum-500"
           >
             {chip}
           </span>

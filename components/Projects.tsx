@@ -22,7 +22,7 @@ const item: Variants = {
 
 function CategoryBadge({ project }: { project: Project }) {
   return (
-    <span className="rounded-full border border-white/[0.08] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-platinum-400">
+    <span className="rounded-full border border-line px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-platinum-400">
       {project.category}
     </span>
   );
@@ -34,7 +34,7 @@ function StackRow({ project }: { project: Project }) {
       {project.stack.map((tech) => (
         <span
           key={tech}
-          className="rounded-full border border-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-platinum-500"
+          className="rounded-full border border-line-soft px-2.5 py-0.5 text-[11px] font-medium text-platinum-500"
         >
           {tech}
         </span>
@@ -97,7 +97,7 @@ function StandardCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-6 border-t border-white/[0.05] pt-5">
+        <div className="mt-6 border-t border-line-soft pt-5">
           <StackRow project={project} />
         </div>
         {project.url && (

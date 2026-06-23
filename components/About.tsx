@@ -47,7 +47,7 @@ export default function About() {
             </div>
 
             {/* Fundação de rede — diferencial técnico, tom contido */}
-            <div className="mt-8 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-6">
+            <div className="mt-8 rounded-2xl border border-line-soft bg-tint p-6">
               <div className="flex items-center gap-2.5">
                 <Network size={17} className="text-copper" />
                 <h3 className="font-display text-sm font-medium uppercase tracking-[0.15em] text-platinum-300">
@@ -61,7 +61,7 @@ export default function About() {
                 {foundation.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/[0.07] px-2.5 py-1 text-xs text-platinum-500"
+                    className="rounded-full border border-line-soft px-2.5 py-1 text-xs text-platinum-500"
                   >
                     {tag}
                   </span>
