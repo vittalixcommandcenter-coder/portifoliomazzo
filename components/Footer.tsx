@@ -1,8 +1,8 @@
 "use client";
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import Reveal from "./Reveal";
-import { profile, socials } from "@/lib/data";
+import { company, profile, socials } from "@/lib/data";
 
 const links = [
   { label: "LinkedIn", href: socials.linkedin, icon: Linkedin, external: true },
@@ -60,10 +60,21 @@ export default function Footer() {
       <div className="mx-auto mt-20 max-w-6xl">
         <div className="accent-divider" />
         <div className="flex flex-col items-center justify-between gap-3 pt-6 text-xs text-ash-500 sm:flex-row">
-          <span className="font-display font-semibold text-ash-300">
-            {profile.shortName}
-            <span className="text-amber">.</span>
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="font-display font-semibold text-ash-300">
+              {profile.shortName}
+              <span className="text-amber">.</span>
+            </span>
+            <a
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-ash-400 transition-colors hover:text-amber-soft"
+            >
+              <ExternalLink size={12} />
+              {company.name}
+            </a>
+          </div>
           <span>
             © {new Date().getFullYear()} — Construído com Next.js, Tailwind &amp;
             Framer Motion.

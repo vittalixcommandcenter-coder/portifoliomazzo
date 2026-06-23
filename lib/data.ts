@@ -5,6 +5,7 @@ import {
   AudioLines,
   Scissors,
   Boxes,
+  Building2,
   BrainCircuit,
   Cloud,
   Code2,
@@ -49,6 +50,12 @@ export const socials = {
   linkedin: "https://www.linkedin.com/in/guilhermemazzoo/",
   github: "https://github.com/vittalixcommandcenter-coder",
   email: "guilhermazzo@gmail.com",
+};
+
+/* Site da empresa (marca) */
+export const company = {
+  name: "Vittalix",
+  url: "https://vittalix.com.br",
 };
 
 /* Texto da seção "Sobre" */
@@ -209,6 +216,22 @@ export const projects: Project[] = [
     stack: ["React", "Node.js", "PostgreSQL", "Assinatura Digital"],
     icon: FileSignature,
     accent: "amber",
+  },
+  {
+    name: "Vittalix",
+    tagline: "Site institucional e marca do ecossistema",
+    category: "Institucional · Branding",
+    description:
+      "Site institucional e plataforma da minha própria empresa de tecnologia — o ponto de encontro do ecossistema, onde a identidade visual é apresentada e os produtos SaaS se conectam sob uma marca única.",
+    focus: [
+      "Identidade visual e branding do ecossistema",
+      "Vitrine institucional dos produtos",
+      "Performance e SEO com Next.js + Cloudflare",
+    ],
+    stack: ["Next.js", "Tailwind CSS", "Framer Motion", "Cloudflare"],
+    url: "https://vittalix.com.br",
+    icon: Building2,
+    accent: "emerald",
   },
 ];
 
