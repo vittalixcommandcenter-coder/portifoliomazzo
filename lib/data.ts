@@ -199,6 +199,7 @@ export const projects: Project[] = [
       "Fluxo financeiro e pagamentos integrados",
     ],
     stack: ["PWA", "React", "Service Workers", "Pagamentos"],
+    url: "https://zerocut.vittalix.com.br",
     icon: Scissors,
     accent: "emerald",
   },
