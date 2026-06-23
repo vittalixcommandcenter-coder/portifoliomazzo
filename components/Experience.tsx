@@ -66,7 +66,23 @@ export default function Experience() {
                     {exp.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <ul className="mt-4 space-y-2">
+                    {exp.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2.5 text-sm text-ash-300"
+                      >
+                        <span
+                          className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
+                            exp.current ? "bg-amber" : "bg-emerald"
+                          }`}
+                        />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {exp.tags.map((tag) => (
                       <span
                         key={tag}
