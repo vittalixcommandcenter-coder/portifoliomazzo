@@ -11,18 +11,18 @@ import { useRef, type ReactNode } from "react";
 /* Efeito Tilt 3D suave seguindo o cursor + brilho ("spotlight") que
    acompanha o mouse. Desativa-se naturalmente em toque/teclado. */
 
-const ROTATION = 9; // graus máximos de inclinação
+const ROTATION = 6; // graus máximos de inclinação (sutil, Apple-like)
 
 type TiltCardProps = {
   children: ReactNode;
   className?: string;
-  glow?: "amber" | "emerald";
+  glow?: "platinum";
 };
 
 export default function TiltCard({
   children,
   className = "",
-  glow = "amber",
+  glow = "platinum",
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -62,10 +62,9 @@ export default function TiltCard({
     rotateY.set(0);
   };
 
-  const glowColor =
-    glow === "emerald" ? "rgba(16,185,129,0.18)" : "rgba(245,158,11,0.18)";
-
-  const spotlight = useMotionTemplate`radial-gradient(circle at ${mouseX}% ${mouseY}%, ${glowColor}, transparent 60%)`;
+  // Spotlight branco translúcido (monocromático, à la Apple)
+  void glow;
+  const spotlight = useMotionTemplate`radial-gradient(circle at ${mouseX}% ${mouseY}%, rgba(255,255,255,0.07), transparent 55%)`;
 
   return (
     <motion.div

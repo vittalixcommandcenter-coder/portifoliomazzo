@@ -9,56 +9,54 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base escura sofisticada (Obsidian)
-        obsidian: {
-          950: "#0a0a0b",
-          900: "#0e0f11",
-          800: "#16181c",
-          700: "#1d2024",
-          600: "#272b30",
+        // Base grafite profunda (quase-preto, levemente fria)
+        graphite: {
+          950: "#08090a",
+          900: "#0c0d0f",
+          850: "#101113",
+          800: "#15171a",
+          700: "#1c1f23",
+          600: "#26292e",
+          500: "#34383e",
         },
-        // Off-white / cinzas de leitura
-        ash: {
-          100: "#f4f4f3",
-          200: "#e4e4e2",
-          300: "#c7c8c4",
-          400: "#9a9c97",
-          500: "#6f716c",
+        // Texto / superfícies em platina (off-white frio -> prata)
+        platinum: {
+          50: "#f6f7f8",
+          100: "#eceef0",
+          200: "#d7dadd",
+          300: "#b3b8bd",
+          400: "#8a9095",
+          500: "#5f656b",
+          600: "#41464b",
         },
-        // Acento Âmbar
-        amber: {
-          DEFAULT: "#f59e0b",
-          soft: "#fbbf24",
-          deep: "#d97706",
-        },
-        // Acento Esmeralda
-        emerald: {
-          DEFAULT: "#10b981",
-          soft: "#34d399",
-          deep: "#059669",
-        },
+        // Acento único: branco-gelo (luz). Usado com extrema parcimônia.
+        ice: "#f5f5f7",
       },
       fontFamily: {
         display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
+      letterSpacing: {
+        tightest: "-0.045em",
+      },
       boxShadow: {
-        "glow-amber": "0 0 40px -8px rgba(245, 158, 11, 0.45)",
-        "glow-emerald": "0 0 40px -8px rgba(16, 185, 129, 0.45)",
+        // Sombras suaves, à la Apple (profundidade sem cor)
+        soft: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 50px -20px rgba(0,0,0,0.7)",
+        lift: "0 30px 80px -30px rgba(0,0,0,0.8)",
       },
       keyframes: {
-        "gradient-pan": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-14px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
       },
       animation: {
-        "gradient-pan": "gradient-pan 8s ease infinite",
-        float: "float 6s ease-in-out infinite",
+        float: "float 7s ease-in-out infinite",
+        "fade-in": "fade-in 1s ease forwards",
       },
     },
   },

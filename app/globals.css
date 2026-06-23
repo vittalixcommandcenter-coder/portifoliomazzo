@@ -12,12 +12,14 @@ html {
 
 @layer base {
   body {
-    @apply bg-obsidian-950 text-ash-200 font-sans antialiased;
+    @apply bg-graphite-950 text-platinum-300 font-sans antialiased;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Aurora ambiente fixa — substitui o antigo quadriculado.
-     Manchas de luz âmbar/esmeralda muito desfocadas, profundas. */
+  /* Fundo calmo, monocromático: um leve halo de luz no topo,
+     vinheta escura nas bordas. Nada de cor — só profundidade. */
   body::before {
     content: "";
     position: fixed;
@@ -25,75 +27,74 @@ html {
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(45rem 45rem at 78% -8%, rgba(245, 158, 11, 0.10), transparent 60%),
-      radial-gradient(40rem 40rem at -8% 18%, rgba(16, 185, 129, 0.09), transparent 58%),
-      radial-gradient(50rem 50rem at 50% 120%, rgba(217, 119, 6, 0.07), transparent 60%);
+      radial-gradient(60rem 38rem at 50% -12%, rgba(255, 255, 255, 0.05), transparent 60%),
+      radial-gradient(80rem 80rem at 50% 120%, rgba(255, 255, 255, 0.02), transparent 60%);
   }
 
-  /* Grão de filme sutil sobre tudo — tira a sensação "chapada"/IA. */
+  /* Vinheta sutil para focar o olhar no centro */
   body::after {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    box-shadow: inset 0 0 200px 40px rgba(0, 0, 0, 0.55);
   }
 
   ::selection {
-    @apply bg-amber/30 text-ash-100;
+    @apply bg-platinum-100/20 text-ice;
+  }
+
+  h1, h2, h3 {
+    @apply tracking-tightest;
   }
 }
 
 @layer components {
-  /* Glassmorphism reutilizável */
+  /* Vidro fosco discreto, estilo Apple — borda finíssima e luz superior */
   .glass {
-    @apply border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl;
+    @apply border border-white/[0.07] bg-white/[0.025] backdrop-blur-2xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
   }
 
   .glass-strong {
-    @apply border border-white/[0.08] bg-obsidian-900/70 backdrop-blur-2xl;
+    @apply border border-white/[0.08] bg-graphite-900/60 backdrop-blur-2xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
   }
 
-  /* Texto com gradiente âmbar -> esmeralda (sem azul/roxo) */
-  .text-gradient {
-    @apply bg-gradient-to-r from-amber-soft via-amber to-emerald-soft bg-clip-text text-transparent;
+  /* Botão primário: branco translúcido (CTA Apple) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ice px-6 py-3 text-sm font-medium text-graphite-950 transition-all duration-300 hover:bg-white;
   }
 
-  /* Divisor com brilho âmbar */
-  .accent-divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-amber/50 to-transparent;
+  /* Botão secundário: contorno de vidro */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-medium text-platinum-200 backdrop-blur-xl transition-all duration-300 hover:border-white/[0.22] hover:bg-white/[0.06];
   }
 
-  /* Borda com gradiente vivo (técnica de máscara) para cards de destaque */
-  .border-glow {
-    position: relative;
+  /* Texto com leve brilho prata (para títulos de destaque) */
+  .text-platinum-gradient {
+    @apply bg-gradient-to-b from-white via-platinum-100 to-platinum-400 bg-clip-text text-transparent;
   }
-  .border-glow::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.5), transparent 40%, transparent 60%, rgba(16, 185, 129, 0.5));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+
+  /* Divisor fino quase invisível */
+  .hairline {
+    @apply h-px w-full bg-white/[0.06];
   }
-  .border-glow:hover::before {
-    opacity: 1;
+
+  /* Card que ganha um anel luminoso branco no hover (sutil) */
+  .ring-hover {
+    @apply transition-colors duration-500;
+  }
+  .ring-hover:hover {
+    @apply border-white/[0.16];
   }
 }
 
 @layer utilities {
-  /* Máscara de fade nas laterais (para tickers/marquees) */
   .mask-fade-x {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   }
 }
 
@@ -107,26 +108,25 @@ html {
   }
 }
 .animate-marquee {
-  animation: marquee 32s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
-/* Scrollbar discreta no tema escuro */
+/* Scrollbar discreta e monocromática */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0b;
+  background: #08090a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #272b30;
+  background: #26292e;
   border-radius: 9999px;
-  border: 2px solid #0a0a0b;
+  border: 2px solid #08090a;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3f45;
+  background: #34383e;
 }
 
-/* Respeita usuários que preferem menos movimento */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

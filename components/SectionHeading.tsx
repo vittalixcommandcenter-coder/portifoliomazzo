@@ -6,29 +6,30 @@ type SectionHeadingProps = {
   eyebrow: string;
   title: string;
   description?: string;
+  center?: boolean;
 };
 
 export default function SectionHeading({
   eyebrow,
   title,
   description,
+  center = false,
 }: SectionHeadingProps) {
   return (
-    <div className="mb-12 max-w-2xl md:mb-16">
+    <div className={`mb-14 max-w-2xl md:mb-20 ${center ? "mx-auto text-center" : ""}`}>
       <Reveal>
-        <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.25em] text-amber">
-          <span className="h-px w-8 bg-amber/60" />
+        <span className="text-xs font-medium uppercase tracking-[0.3em] text-platinum-500">
           {eyebrow}
         </span>
       </Reveal>
       <Reveal delay={0.08}>
-        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ash-100 sm:text-4xl md:text-5xl">
+        <h2 className="mt-5 font-display text-4xl font-semibold tracking-tightest text-platinum-gradient sm:text-5xl">
           {title}
         </h2>
       </Reveal>
       {description && (
         <Reveal delay={0.16}>
-          <p className="mt-4 text-base leading-relaxed text-ash-400 md:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-platinum-400 md:text-lg">
             {description}
           </p>
         </Reveal>

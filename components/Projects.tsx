@@ -8,27 +8,21 @@ import { projects, type Project } from "@/lib/data";
 
 const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 32, scale: 0.97 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 function CategoryBadge({ project }: { project: Project }) {
-  const isEmerald = project.accent === "emerald";
   return (
-    <span
-      className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider ${
-        isEmerald ? "bg-emerald/10 text-emerald-soft" : "bg-amber/10 text-amber-soft"
-      }`}
-    >
+    <span className="rounded-full border border-white/[0.08] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-platinum-400">
       {project.category}
     </span>
   );
@@ -40,7 +34,7 @@ function StackRow({ project }: { project: Project }) {
       {project.stack.map((tech) => (
         <span
           key={tech}
-          className="rounded-md border border-white/[0.06] bg-white/[0.02] px-2 py-0.5 text-[11px] font-medium text-ash-400"
+          className="rounded-full border border-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-platinum-500"
         >
           {tech}
         </span>
@@ -51,18 +45,13 @@ function StackRow({ project }: { project: Project }) {
 
 function VisitLink({ project }: { project: Project }) {
   if (!project.url) return null;
-  const isEmerald = project.accent === "emerald";
   const host = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${
-        isEmerald
-          ? "text-emerald-soft hover:text-emerald"
-          : "text-amber-soft hover:text-amber"
-      }`}
+      className="inline-flex items-center gap-1.5 text-xs font-medium text-platinum-300 transition-colors hover:text-ice"
     >
       <ExternalLink size={13} />
       {host}
@@ -73,56 +62,44 @@ function VisitLink({ project }: { project: Project }) {
 /* Card grande, em destaque (ocupa 2 colunas no desktop) */
 function FeaturedCard({ project }: { project: Project }) {
   const Icon = project.icon;
-  const isEmerald = project.accent === "emerald";
-
   return (
-    <TiltCard glow={project.accent} className="h-full">
-      <article className="border-glow glass relative flex h-full flex-col gap-6 overflow-hidden rounded-2xl p-7 md:flex-row md:p-8">
+    <TiltCard className="h-full">
+      <article className="glass ring-hover relative flex h-full flex-col gap-7 overflow-hidden rounded-3xl p-8 md:flex-row md:p-9">
         <div
           aria-hidden
-          className={`pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full blur-3xl ${
-            isEmerald ? "bg-emerald/15" : "bg-amber/15"
-          }`}
+          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/[0.05] blur-[80px]"
         />
-
         <div className="relative flex-1">
           <div className="flex items-center justify-between">
-            <div
-              className={`grid h-14 w-14 place-items-center rounded-2xl border ${
-                isEmerald ? "border-emerald/25 bg-emerald/10" : "border-amber/25 bg-amber/10"
-              }`}
-            >
-              <Icon size={26} className={isEmerald ? "text-emerald-soft" : "text-amber-soft"} />
+            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/[0.1] bg-white/[0.04]">
+              <Icon size={24} className="text-platinum-100" />
             </div>
             <CategoryBadge project={project} />
           </div>
 
-          <h3 className="mt-5 font-display text-2xl font-bold text-ash-100 md:text-3xl">
+          <h3 className="mt-6 font-display text-3xl font-semibold tracking-tightest text-ice">
             {project.name}
           </h3>
-          <p className={`mt-1 text-sm font-medium ${isEmerald ? "text-emerald-soft" : "text-amber-soft"}`}>
+          <p className="mt-1.5 text-sm font-light text-platinum-300">
             {project.tagline}
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-ash-400 md:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-platinum-400 md:text-base">
             {project.description}
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
             <StackRow project={project} />
             <VisitLink project={project} />
           </div>
         </div>
 
-        <div className="relative w-full shrink-0 border-t border-white/[0.06] pt-5 md:w-64 md:border-l md:border-t-0 md:pl-7 md:pt-0">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-ash-500">
+        <div className="relative w-full shrink-0 border-t border-white/[0.06] pt-6 md:w-60 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+          <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-platinum-500">
             Foco técnico
           </span>
-          <ul className="mt-3 space-y-2.5">
+          <ul className="mt-4 space-y-3">
             {project.focus.map((f) => (
-              <li key={f} className="flex items-start gap-2.5 text-sm text-ash-300">
-                <Check
-                  size={15}
-                  className={`mt-0.5 shrink-0 ${isEmerald ? "text-emerald" : "text-amber"}`}
-                />
+              <li key={f} className="flex items-start gap-2.5 text-sm text-platinum-300">
+                <Check size={14} className="mt-0.5 shrink-0 text-platinum-400" />
                 {f}
               </li>
             ))}
@@ -136,57 +113,42 @@ function FeaturedCard({ project }: { project: Project }) {
 /* Card padrão */
 function StandardCard({ project }: { project: Project }) {
   const Icon = project.icon;
-  const isEmerald = project.accent === "emerald";
-
   return (
-    <TiltCard glow={project.accent} className="h-full">
-      <article className="glass relative flex h-full flex-col overflow-hidden rounded-2xl p-6 transition-colors duration-300 group-hover:border-white/[0.14]">
-        <span
-          className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent ${
-            isEmerald ? "via-emerald" : "via-amber"
-          } to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
-        />
-
+    <TiltCard className="h-full">
+      <article className="glass ring-hover relative flex h-full flex-col overflow-hidden rounded-3xl p-7">
         <div className="flex items-center justify-between">
-          <div
-            className={`grid h-12 w-12 place-items-center rounded-xl border ${
-              isEmerald ? "border-emerald/25 bg-emerald/10" : "border-amber/25 bg-amber/10"
-            }`}
-          >
-            <Icon size={22} className={isEmerald ? "text-emerald-soft" : "text-amber-soft"} />
+          <div className="grid h-11 w-11 place-items-center rounded-xl border border-white/[0.1] bg-white/[0.04]">
+            <Icon size={20} className="text-platinum-100" />
           </div>
           <ArrowUpRight
-            size={20}
-            className="text-ash-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ash-200"
+            size={18}
+            className="text-platinum-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ice"
           />
         </div>
 
-        <div className="mt-5">
+        <div className="mt-6">
           <CategoryBadge project={project} />
         </div>
-        <h3 className="mt-3 font-display text-xl font-bold text-ash-100">
+        <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ice">
           {project.name}
         </h3>
-        <p className={`mt-0.5 text-sm font-medium ${isEmerald ? "text-emerald-soft" : "text-amber-soft"}`}>
+        <p className="mt-1 text-sm font-light text-platinum-300">
           {project.tagline}
         </p>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-ash-400">
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-platinum-400">
           {project.description}
         </p>
 
-        <ul className="mt-4 space-y-1.5">
+        <ul className="mt-5 space-y-2">
           {project.focus.slice(0, 2).map((f) => (
-            <li key={f} className="flex items-start gap-2 text-xs text-ash-400">
-              <Check
-                size={13}
-                className={`mt-0.5 shrink-0 ${isEmerald ? "text-emerald" : "text-amber"}`}
-              />
+            <li key={f} className="flex items-start gap-2 text-xs text-platinum-400">
+              <Check size={12} className="mt-0.5 shrink-0 text-platinum-500" />
               {f}
             </li>
           ))}
         </ul>
 
-        <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/[0.05] pt-4">
+        <div className="mt-6 border-t border-white/[0.05] pt-5">
           <StackRow project={project} />
         </div>
         {project.url && (
@@ -201,11 +163,11 @@ function StandardCard({ project }: { project: Project }) {
 
 export default function Projects() {
   return (
-    <section id="projetos" className="relative px-6 py-24 md:py-32">
+    <section id="projetos" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Ecossistema"
-          title="Projetos Desenvolvidos"
+          title="Projetos desenvolvidos"
           description="SaaS multinicho construído de ponta a ponta — cada plataforma resolve uma regra de negócio real em um mercado diferente."
         />
 
@@ -214,7 +176,7 @@ export default function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project) => (
             <motion.div

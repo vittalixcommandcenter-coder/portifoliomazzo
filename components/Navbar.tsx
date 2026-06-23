@@ -18,30 +18,30 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -64, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-x-0 top-0 z-50 px-4 pt-4"
     >
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
-          scrolled ? "glass-strong shadow-lg shadow-black/30" : "glass"
+        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 ${
+          scrolled ? "glass-strong" : "glass"
         }`}
       >
         <a
           href="#topo"
-          className="font-display text-lg font-bold tracking-tight text-ash-100"
+          className="font-display text-base font-semibold tracking-tightest text-ice"
         >
-          GM<span className="text-amber">.</span>
+          Guilherme Mazzo
         </a>
 
         {/* Desktop */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-0.5 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-lg px-4 py-2 text-sm font-medium text-ash-300 transition-colors hover:bg-white/[0.04] hover:text-ash-100"
+                className="rounded-full px-3.5 py-1.5 text-[13px] font-medium text-platinum-400 transition-colors hover:text-ice"
               >
                 {link.label}
               </a>
@@ -51,18 +51,18 @@ export default function Navbar() {
 
         <a
           href={`mailto:${socials.email}`}
-          className="hidden rounded-lg bg-amber px-4 py-2 text-sm font-semibold text-obsidian-950 shadow-glow-amber transition-transform hover:scale-[1.03] md:inline-block"
+          className="hidden rounded-full bg-ice px-4 py-1.5 text-[13px] font-medium text-graphite-950 transition-colors hover:bg-white md:inline-block"
         >
-          Fale comigo
+          Contato
         </a>
 
         {/* Mobile toggle */}
         <button
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-lg text-ash-200 transition-colors hover:bg-white/[0.05] md:hidden"
+          className="grid h-9 w-9 place-items-center rounded-full text-platinum-200 transition-colors hover:bg-white/[0.06] md:hidden"
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </nav>
 
@@ -73,15 +73,15 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-            className="glass-strong mx-auto mt-2 max-w-6xl space-y-1 rounded-2xl p-3 md:hidden"
+            transition={{ duration: 0.25 }}
+            className="glass-strong mx-auto mt-2 max-w-5xl space-y-0.5 rounded-3xl p-3 md:hidden"
           >
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm font-medium text-ash-300 transition-colors hover:bg-white/[0.05] hover:text-ash-100"
+                  className="block rounded-2xl px-4 py-3 text-sm font-medium text-platinum-300 transition-colors hover:bg-white/[0.05] hover:text-ice"
                 >
                   {link.label}
                 </a>
