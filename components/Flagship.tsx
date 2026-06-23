@@ -1,9 +1,45 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Star, Stethoscope } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import {
+  ArrowUpRight,
+  BrainCircuit,
+  Check,
+  FileSignature,
+  Layers,
+  MessageSquareText,
+  ScanSearch,
+  ShieldCheck,
+  Star,
+  Stethoscope,
+  type LucideIcon,
+} from "lucide-react";
 import Reveal from "./Reveal";
 import { flagship } from "@/lib/data";
+
+// Ícone por recurso (mesma ordem do array em data.ts)
+const featureIcons: LucideIcon[] = [
+  ShieldCheck, // Transcrição segura
+  FileSignature, // Assinatura ICP-Brasil
+  BrainCircuit, // Co-Piloto clínico
+  ScanSearch, // Visão de exames
+  MessageSquareText, // Follow-up
+  Layers, // Multi-tenant
+];
+
+const grid: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
+const cell: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function Flagship() {
   return (
@@ -21,19 +57,19 @@ export default function Flagship() {
               </h2>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-platinum-400">
-              O ProntuIA reúne tudo o que faço de melhor: arquitetura de dados,
-              tempo real e UI/UX premium em um único SaaS.
+              O ProntuIA reúne tudo o que faço de melhor: segurança de nível
+              clínico, IA aplicada e UI/UX premium em um único SaaS.
             </p>
           </div>
         </Reveal>
 
         <div className="relative mt-9 overflow-hidden rounded-[2rem]">
-          {/* halo de luz com toque de cobre */}
           <div
             aria-hidden
             className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-copper/[0.08] blur-[100px]"
           />
 
+          {/* Bloco principal */}
           <div className="glass-strong relative grid gap-12 rounded-[2rem] p-8 shadow-lift md:grid-cols-[1.1fr_1fr] md:p-14">
             <div>
               <div className="flex items-center gap-3">
@@ -110,6 +146,40 @@ export default function Flagship() {
             </div>
           </div>
         </div>
+
+        {/* Grade de recursos premium */}
+        <Reveal>
+          <p className="mt-12 text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
+            Recursos que diferenciam
+          </p>
+        </Reveal>
+
+        <motion.div
+          variants={grid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {flagship.features.map((f, i) => {
+            const Icon = featureIcons[i] ?? ShieldCheck;
+            return (
+              <motion.div key={f.title} variants={cell}>
+                <div className="glass ring-hover flex h-full flex-col rounded-2xl p-6">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
+                    <Icon size={18} className="text-copper-soft" />
+                  </div>
+                  <h3 className="mt-4 font-display text-base font-medium text-ice">
+                    {f.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-platinum-400">
+                    {f.text}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

@@ -94,24 +94,60 @@ export const flagship = {
   name: "ProntuIA",
   url: "https://prontuia.com.br",
   category: "HealthTech · SaaS Premium",
-  tagline: "Telemedicina e gestão clínica de alto nível",
+  tagline: "Gestão clínica com IA, do prontuário à assinatura digital",
   description:
-    "Um ecossistema SaaS completo e premium para a gestão integrada de clínicas médicas e profissionais de saúde. Une prontuário, agenda, atendimento digital e telemedicina em tempo real numa experiência fluida, rápida e sem atrito — pensada para lidar com informações sensíveis com performance e integridade.",
+    "Um ecossistema SaaS premium para clínicas e profissionais de saúde, que une teleconsulta, prontuário eletrônico, financeiro e inteligência artificial num só lugar. Arquitetura multi-tenant com isolamento rígido de dados, auditoria imutável e segurança de nível clínico — pensado para escalar sem abrir mão de privacidade.",
+  // Recursos premium (diferenciais reais, sem expor internals sensíveis)
+  features: [
+    {
+      title: "Transcrição segura de consultas",
+      text: "Gravação com criptografia ponta-a-ponta (RSA + AES-GCM) e transcrição via Whisper-v3 — privacidade absoluta do prontuário.",
+    },
+    {
+      title: "Assinatura digital ICP-Brasil",
+      text: "Documentos médicos assinados em PAdES e ICP-Brasil/gov.br, com certificados operados em client-side (a senha nunca trafega).",
+    },
+    {
+      title: "Co-Piloto clínico com IA",
+      text: "IA generativa mapeada ao CID-10 sugere diagnósticos diferenciais ao médico em tempo real.",
+    },
+    {
+      title: "Visão de exames inteligente",
+      text: "IA multimodal extrai e analisa automaticamente fotos de exames e laudos dos pacientes.",
+    },
+    {
+      title: "Follow-up automatizado (CRM clínico)",
+      text: "Motores de PNL conduzem a jornada de pós-consulta e o retorno do paciente com fluxos em tempo real.",
+    },
+    {
+      title: "Arquitetura multi-tenant",
+      text: "Isolamento estrito de dados por clínica, auditoria imutável e governança pensada para escala.",
+    },
+  ],
+  // Os 3 pilares de competência (resumo de alto nível)
   highlights: [
     {
-      title: "Modelagem de dados sensíveis",
-      text: "Estruturação complexa de banco relacional com foco em performance e integridade de dados clínicos.",
+      title: "Segurança de nível clínico",
+      text: "Criptografia ponta-a-ponta, cofre de certificados e trilha de auditoria imutável para dados sensíveis.",
+    },
+    {
+      title: "IA aplicada à medicina",
+      text: "Apoio à decisão com CID-10, transcrição e visão computacional de exames em produção.",
     },
     {
       title: "UI/UX padrão premium",
-      text: "Interfaces refinadas que garantem fluxos rápidos e sem atrito para profissionais de saúde.",
-    },
-    {
-      title: "Telemedicina em tempo real",
-      text: "Integração de ferramentas clínicas e módulos de atendimento digital por vídeo.",
+      text: "Interfaces refinadas e fluxos sem atrito, com tempo real do agendamento à teleconsulta.",
     },
   ],
-  stack: ["Next.js", "TypeScript", "Supabase", "WebRTC", "Row Level Security"],
+  stack: [
+    "React 18",
+    "TypeScript",
+    "Vite",
+    "Supabase",
+    "Edge Functions",
+    "Tailwind",
+    "Framer Motion",
+  ],
 };
 
 /* ------------------------------------------------------------------ *
@@ -134,16 +170,16 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: "ProntuIA",
-    tagline: "Telemedicina e gestão clínica de alto nível",
+    tagline: "Gestão clínica com IA, do prontuário à assinatura digital",
     category: "HealthTech · SaaS Premium",
     description:
-      "Ecossistema SaaS premium para gestão integrada de clínicas e profissionais de saúde, com telemedicina em tempo real, prontuário e UI/UX refinada para dados sensíveis.",
+      "Ecossistema SaaS premium para clínicas, unindo teleconsulta, prontuário, financeiro e IA — com criptografia ponta-a-ponta, assinatura ICP-Brasil e arquitetura multi-tenant.",
     focus: [
-      "Modelagem de banco relacional para dados clínicos sensíveis",
-      "Interfaces premium com fluxos rápidos e sem atrito",
-      "Telemedicina e atendimento digital em tempo real",
+      "Transcrição cripto ponta-a-ponta e IA clínica (CID-10)",
+      "Assinatura digital ICP-Brasil/PAdES",
+      "Arquitetura multi-tenant com auditoria imutável",
     ],
-    stack: ["Next.js", "TypeScript", "Supabase", "WebRTC"],
+    stack: ["React 18", "TypeScript", "Supabase", "Edge Functions"],
     url: "https://prontuia.com.br",
     icon: Stethoscope,
     accent: "emerald",
