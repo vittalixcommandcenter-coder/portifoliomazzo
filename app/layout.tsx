@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     "WebRTC",
   ],
   authors: [{ name: "Guilherme Augusto Mazzo de Oliveira" }],
+  creator: "Guilherme Augusto Mazzo de Oliveira",
+  alternates: {
+    canonical: "https://mazzo.vittalix.com.br",
+  },
   openGraph: {
     title: "Guilherme Mazzo — Desenvolvedor Full-Stack & SaaS",
     description:
@@ -40,6 +44,31 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://mazzo.vittalix.com.br",
+    siteName: "Guilherme Mazzo",
+    images: [
+      {
+        url: "/og.svg",
+        width: 1200,
+        height: 630,
+        alt: "Guilherme Mazzo — Desenvolvedor Full-Stack & SaaS",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Guilherme Mazzo — Desenvolvedor Full-Stack & SaaS",
+    description:
+      "Ecossistemas SaaS complexos, PWAs mobile-first e soluções com IA. Criador do ProntuIA.",
+    images: ["/og.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 };
 
