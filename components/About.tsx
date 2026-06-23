@@ -49,7 +49,7 @@ export default function About() {
             {/* Fundação de rede — diferencial técnico, tom contido */}
             <div className="mt-8 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-6">
               <div className="flex items-center gap-2.5">
-                <Network size={17} className="text-platinum-300" />
+                <Network size={17} className="text-copper" />
                 <h3 className="font-display text-sm font-medium uppercase tracking-[0.15em] text-platinum-300">
                   {foundation.title}
                 </h3>
@@ -74,8 +74,8 @@ export default function About() {
             {pillars.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.1}>
                 <div className="glass ring-hover flex items-start gap-4 rounded-2xl p-5">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.05]">
-                    <p.icon size={18} className="text-platinum-200" />
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
+                    <p.icon size={18} className="text-copper-soft" />
                   </div>
                   <div>
                     <h3 className="font-display font-medium text-ice">

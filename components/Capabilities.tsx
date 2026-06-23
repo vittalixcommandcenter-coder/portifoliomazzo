@@ -39,8 +39,8 @@ export default function Capabilities() {
           {capabilities.map((cap) => (
             <motion.div key={cap.title} variants={cell}>
               <div className="glass ring-hover flex h-full flex-col rounded-3xl p-7">
-                <div className="grid h-11 w-11 place-items-center rounded-xl border border-white/[0.1] bg-white/[0.04]">
-                  <cap.icon size={20} className="text-platinum-100" />
+                <div className="grid h-11 w-11 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
+                  <cap.icon size={20} className="text-copper-soft" />
                 </div>
                 <h3 className="mt-6 font-display text-lg font-medium text-ice">
                   {cap.title}
@@ -58,9 +58,9 @@ export default function Capabilities() {
             {techStack.map((tech) => (
               <span
                 key={tech.name}
-                className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] px-3.5 py-2 text-sm text-platinum-400 transition-colors hover:border-white/[0.16] hover:text-ice"
+                className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] px-3.5 py-2 text-sm text-platinum-400 transition-colors hover:border-copper/35 hover:text-ice"
               >
-                <tech.icon size={14} className="text-platinum-300" />
+                <tech.icon size={14} className="text-copper/80" />
                 {tech.name}
               </span>
             ))}

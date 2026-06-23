@@ -31,6 +31,13 @@ const config: Config = {
         },
         // Acento único: branco-gelo (luz). Usado com extrema parcimônia.
         ice: "#f5f5f7",
+        // Acento de cor: cobre / terracota (sóbrio, terroso, marcante)
+        copper: {
+          DEFAULT: "#c47a52",
+          soft: "#d99873",
+          deep: "#a8623e",
+          glow: "rgba(196, 122, 82, 0.4)",
+        },
       },
       fontFamily: {
         display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],

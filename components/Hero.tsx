@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Download } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { profile, stats, techMarquee } from "@/lib/data";
+import { profile, stats, heroChips } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -23,30 +23,32 @@ export default function Hero() {
     <section
       ref={ref}
       id="topo"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-12 pt-36 text-center"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-36 text-center"
     >
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
         className="mx-auto flex w-full max-w-4xl flex-col items-center"
       >
-        {/* Avatar discreto, sem anel colorido — apenas borda de luz */}
+        {/* Avatar com fino anel de cobre */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease }}
           className="animate-float"
         >
-          <div className="relative h-28 w-28 overflow-hidden rounded-full border border-white/10 shadow-lift sm:h-32 sm:w-32">
-            <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/[0.08]" />
-            <Image
-              src={photoSrc}
-              alt={profile.name}
-              width={160}
-              height={160}
-              priority
-              onError={() => setPhotoSrc(profile.photoFallback)}
-              className="h-full w-full object-cover"
-            />
+          <div className="relative h-28 w-28 rounded-full p-[1.5px] sm:h-32 sm:w-32">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-b from-copper/50 to-transparent" />
+            <div className="relative h-full w-full overflow-hidden rounded-full border border-white/10 shadow-lift">
+              <Image
+                src={photoSrc}
+                alt={profile.name}
+                width={160}
+                height={160}
+                priority
+                onError={() => setPhotoSrc(profile.photoFallback)}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -57,13 +59,12 @@ export default function Hero() {
           className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.025] px-3.5 py-1.5 text-[12px] font-medium text-platinum-400 backdrop-blur-xl"
         >
           <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60 opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white/80" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-copper opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-copper" />
           </span>
           Disponível para novos projetos
         </motion.span>
 
-        {/* Título grande e refinado */}
         <motion.h1
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,9 +78,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease }}
-          className="mt-3 font-display text-xl font-light text-platinum-400 sm:text-2xl md:text-3xl"
+          className="mt-3 font-display text-xl font-light text-platinum-300 sm:text-2xl md:text-3xl"
         >
-          Desenvolvedor Full-Stack &amp; SaaS
+          Desenvolvedor{" "}
+          <span className="font-normal text-copper-gradient">Full-Stack</span>{" "}
+          &amp; SaaS
         </motion.p>
 
         <motion.p
@@ -110,7 +113,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Stats minimalistas — sem caixas, só hairlines */}
+        {/* Stats minimalistas */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,19 +133,22 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Ticker de stack, bem discreto */}
-      <div className="mask-fade-x absolute bottom-8 w-full overflow-hidden">
-        <div className="flex w-max animate-marquee gap-8 opacity-60">
-          {[...techMarquee, ...techMarquee].map((tech, i) => (
-            <span
-              key={`${tech}-${i}`}
-              className="whitespace-nowrap text-xs font-medium tracking-wide text-platinum-500"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Chips de stack estáticos (sem esteira) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+        className="absolute bottom-10 hidden w-full max-w-3xl flex-wrap items-center justify-center gap-2 px-6 md:flex"
+      >
+        {heroChips.map((chip) => (
+          <span
+            key={chip}
+            className="rounded-full border border-white/[0.06] px-3 py-1 text-xs font-medium text-platinum-500"
+          >
+            {chip}
+          </span>
+        ))}
+      </motion.div>
     </section>
   );
 }

@@ -18,8 +18,8 @@ html {
     text-rendering: optimizeLegibility;
   }
 
-  /* Fundo calmo, monocromático: um leve halo de luz no topo,
-     vinheta escura nas bordas. Nada de cor — só profundidade. */
+  /* Fundo calmo: halo de luz no topo + um toque quente de cobre
+     muito sutil, vinheta escura nas bordas. */
   body::before {
     content: "";
     position: fixed;
@@ -27,8 +27,9 @@ html {
     z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(60rem 38rem at 50% -12%, rgba(255, 255, 255, 0.05), transparent 60%),
-      radial-gradient(80rem 80rem at 50% 120%, rgba(255, 255, 255, 0.02), transparent 60%);
+      radial-gradient(60rem 38rem at 50% -12%, rgba(255, 255, 255, 0.045), transparent 60%),
+      radial-gradient(46rem 30rem at 80% 8%, rgba(196, 122, 82, 0.07), transparent 62%),
+      radial-gradient(50rem 40rem at 12% 92%, rgba(196, 122, 82, 0.05), transparent 60%);
   }
 
   /* Vinheta sutil para focar o olhar no centro */
@@ -62,19 +63,25 @@ html {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
   }
 
-  /* Botão primário: branco translúcido (CTA Apple) */
+  /* Botão primário: cobre (CTA com cor, sóbrio) */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ice px-6 py-3 text-sm font-medium text-graphite-950 transition-all duration-300 hover:bg-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-graphite-950 transition-all duration-300 hover:bg-copper-soft;
+    box-shadow: 0 8px 30px -10px rgba(196, 122, 82, 0.5);
   }
 
   /* Botão secundário: contorno de vidro */
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-medium text-platinum-200 backdrop-blur-xl transition-all duration-300 hover:border-white/[0.22] hover:bg-white/[0.06];
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-3 text-sm font-medium text-platinum-200 backdrop-blur-xl transition-all duration-300 hover:border-copper/40 hover:bg-white/[0.06] hover:text-ice;
   }
 
   /* Texto com leve brilho prata (para títulos de destaque) */
   .text-platinum-gradient {
     @apply bg-gradient-to-b from-white via-platinum-100 to-platinum-400 bg-clip-text text-transparent;
+  }
+
+  /* Texto com brilho de cobre (para palavras de destaque) */
+  .text-copper-gradient {
+    @apply bg-gradient-to-br from-copper-soft via-copper to-copper-deep bg-clip-text text-transparent;
   }
 
   /* Divisor fino quase invisível */

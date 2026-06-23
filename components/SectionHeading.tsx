@@ -18,7 +18,8 @@ export default function SectionHeading({
   return (
     <div className={`mb-14 max-w-2xl md:mb-20 ${center ? "mx-auto text-center" : ""}`}>
       <Reveal>
-        <span className="text-xs font-medium uppercase tracking-[0.3em] text-platinum-500">
+        <span className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.3em] text-copper">
+          <span className="h-1 w-1 rounded-full bg-copper" />
           {eyebrow}
         </span>
       </Reveal>

@@ -75,22 +75,16 @@ export const stats = [
   { value: "Full-Stack", label: "Do banco de dados ao deploy" },
 ];
 
-/* Ticker de tecnologias que roda no Hero */
-export const techMarquee = [
+/* Chips de stack estáticos exibidos no rodapé do Hero (seleção curta) */
+export const heroChips = [
   "React",
   "Next.js",
   "TypeScript",
-  "PWA",
   "Supabase",
-  "PostgreSQL",
-  "Row Level Security",
-  "Cloudflare Pages",
-  "Cloudflare Workers",
+  "PWA",
   "WebRTC",
-  "Gemini API",
-  "Mistral AI",
+  "Cloudflare",
   "Orquestração por IA",
-  "Automação orientada a eventos",
 ];
 
 /* ------------------------------------------------------------------ *

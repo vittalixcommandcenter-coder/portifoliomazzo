@@ -15,7 +15,8 @@ export default function Footer() {
     <footer id="contato" className="relative px-6 pb-12 pt-28 md:pt-36">
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-platinum-500">
+          <span className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.3em] text-copper">
+            <span className="h-1 w-1 rounded-full bg-copper" />
             Contato
           </span>
         </Reveal>
@@ -47,7 +48,7 @@ export default function Footer() {
               >
                 <link.icon
                   size={16}
-                  className="text-platinum-300 transition-colors group-hover:text-ice"
+                  className="text-copper transition-colors group-hover:text-copper-soft"
                 />
                 {link.label}
               </a>

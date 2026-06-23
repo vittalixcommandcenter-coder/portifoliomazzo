@@ -10,25 +10,26 @@ export default function Flagship() {
     <section id="prontuia" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <span className="text-xs font-medium uppercase tracking-[0.3em] text-platinum-500">
+          <span className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.3em] text-copper">
+            <span className="h-1 w-1 rounded-full bg-copper" />
             Projeto carro-chefe
           </span>
         </Reveal>
 
         <div className="relative mt-7 overflow-hidden rounded-[2rem]">
-          {/* halo de luz monocromático */}
+          {/* halo de luz com toque de cobre */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-white/[0.04] blur-[100px]"
+            className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-copper/[0.08] blur-[100px]"
           />
 
           <div className="glass-strong relative grid gap-12 rounded-[2rem] p-8 shadow-lift md:grid-cols-[1.1fr_1fr] md:p-14">
             <div>
               <div className="flex items-center gap-3">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/[0.1] bg-white/[0.04]">
-                  <Stethoscope size={24} className="text-platinum-100" />
+                <div className="grid h-12 w-12 place-items-center rounded-2xl border border-copper/25 bg-copper/[0.1]">
+                  <Stethoscope size={24} className="text-copper-soft" />
                 </div>
-                <span className="rounded-full border border-white/[0.08] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-platinum-400">
+                <span className="rounded-full border border-copper/20 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-copper">
                   {flagship.category}
                 </span>
               </div>
@@ -81,8 +82,8 @@ export default function Flagship() {
                   className="glass ring-hover rounded-2xl p-5"
                 >
                   <div className="flex items-start gap-3.5">
-                    <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/[0.06]">
-                      <Check size={14} className="text-platinum-100" />
+                    <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-copper/[0.12]">
+                      <Check size={14} className="text-copper-soft" />
                     </div>
                     <div>
                       <h3 className="font-display font-medium text-ice">

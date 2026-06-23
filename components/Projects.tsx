@@ -51,7 +51,7 @@ function VisitLink({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 text-xs font-medium text-platinum-300 transition-colors hover:text-ice"
+      className="inline-flex items-center gap-1.5 text-xs font-medium text-copper transition-colors hover:text-copper-soft"
     >
       <ExternalLink size={13} />
       {host}
@@ -71,8 +71,8 @@ function FeaturedCard({ project }: { project: Project }) {
         />
         <div className="relative flex-1">
           <div className="flex items-center justify-between">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/[0.1] bg-white/[0.04]">
-              <Icon size={24} className="text-platinum-100" />
+            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-copper/20 bg-copper/[0.08]">
+              <Icon size={24} className="text-copper-soft" />
             </div>
             <CategoryBadge project={project} />
           </div>
@@ -93,13 +93,13 @@ function FeaturedCard({ project }: { project: Project }) {
         </div>
 
         <div className="relative w-full shrink-0 border-t border-white/[0.06] pt-6 md:w-60 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-          <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-platinum-500">
+          <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-copper">
             Foco técnico
           </span>
           <ul className="mt-4 space-y-3">
             {project.focus.map((f) => (
               <li key={f} className="flex items-start gap-2.5 text-sm text-platinum-300">
-                <Check size={14} className="mt-0.5 shrink-0 text-platinum-400" />
+                <Check size={14} className="mt-0.5 shrink-0 text-copper" />
                 {f}
               </li>
             ))}
@@ -117,12 +117,12 @@ function StandardCard({ project }: { project: Project }) {
     <TiltCard className="h-full">
       <article className="glass ring-hover relative flex h-full flex-col overflow-hidden rounded-3xl p-7">
         <div className="flex items-center justify-between">
-          <div className="grid h-11 w-11 place-items-center rounded-xl border border-white/[0.1] bg-white/[0.04]">
-            <Icon size={20} className="text-platinum-100" />
+          <div className="grid h-11 w-11 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
+            <Icon size={20} className="text-copper-soft" />
           </div>
           <ArrowUpRight
             size={18}
-            className="text-platinum-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ice"
+            className="text-platinum-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-copper"
           />
         </div>
 
@@ -142,7 +142,7 @@ function StandardCard({ project }: { project: Project }) {
         <ul className="mt-5 space-y-2">
           {project.focus.slice(0, 2).map((f) => (
             <li key={f} className="flex items-start gap-2 text-xs text-platinum-400">
-              <Check size={12} className="mt-0.5 shrink-0 text-platinum-500" />
+              <Check size={12} className="mt-0.5 shrink-0 text-copper/80" />
               {f}
             </li>
           ))}
