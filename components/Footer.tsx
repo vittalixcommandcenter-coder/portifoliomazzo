@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import ContactForm from "./ContactForm";
 import Reveal from "./Reveal";
 import { company, profile, socials } from "@/lib/data";
 
@@ -31,13 +32,19 @@ export default function Footer() {
 
         <Reveal delay={0.16}>
           <p className="mx-auto mt-5 max-w-lg text-base text-platinum-400">
-            Aberto a parcerias, projetos SaaS e oportunidades. Escolha o melhor
-            canal abaixo.
+            Aberto a parcerias, projetos SaaS e oportunidades. Escreva abaixo ou
+            use um dos canais diretos.
           </p>
         </Reveal>
 
         <Reveal delay={0.24}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-2.5">
+          <div className="mt-9">
+            <ContactForm />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
             {links.map((link) => (
               <a
                 key={link.label}

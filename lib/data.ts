@@ -78,6 +78,43 @@ export const company = {
   url: "https://vittalix.com.br",
 };
 
+/* ------------------------------------------------------------------ *
+ * CONFIGURAÇÃO — preencha estes dois campos
+ * ------------------------------------------------------------------ */
+export const config = {
+  // WhatsApp: número completo com DDI e DDD, só dígitos (ex: 5518999998888)
+  whatsapp: "5518000000000", // TODO: troque pelo seu número real
+  whatsappMessage: "Olá Guilherme! Vi seu portfólio e gostaria de conversar.",
+  // Web3Forms: crie grátis em https://web3forms.com (leva 30s) e cole a access key
+  web3formsKey: "SUA_ACCESS_KEY_AQUI", // TODO: troque pela sua key do Web3Forms
+  // Cloudflare Web Analytics: cole o token do beacon (Dash > Web Analytics)
+  cfAnalyticsToken: "", // opcional; deixe vazio se não usar
+};
+
+/* "Como eu trabalho" — etapas do processo */
+export const processSteps = [
+  {
+    n: "01",
+    title: "Descoberta",
+    text: "Entendo o problema, o nicho e as regras de negócio antes de escrever qualquer linha. O que importa é resolver, não só entregar.",
+  },
+  {
+    n: "02",
+    title: "Arquitetura",
+    text: "Modelo os dados, defino a stack e desenho a base para escalar com segurança — multi-tenant, performance e integridade desde o início.",
+  },
+  {
+    n: "03",
+    title: "Desenvolvimento",
+    text: "Construo com orquestração por IA e foco em UI/UX premium. Iterações rápidas, mobile-first e qualidade de produto em cada tela.",
+  },
+  {
+    n: "04",
+    title: "Entrega & evolução",
+    text: "Deploy contínuo, monitoramento e refinamento. O produto vai ao ar e continua melhorando com base no uso real.",
+  },
+];
+
 /* Texto da seção "Sobre" */
 export const about = {
   lead: "Eu construo ecossistemas SaaS completos — do banco de dados ao pixel final.",
@@ -372,6 +409,7 @@ export const navLinks = [
   { label: "ProntuIA", href: "#prontuia" },
   { label: "Projetos", href: "#projetos" },
   { label: "Tecnologias", href: "#stack" },
+  { label: "Processo", href: "#processo" },
   { label: "Formação", href: "#formacao" },
   { label: "Contato", href: "#contato" },
 ];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { config } from "@/lib/data";
 import "./globals.css";
 
 const inter = Inter({
@@ -88,6 +89,14 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';var r=document.documentElement;r.classList.toggle('light',t==='light');r.classList.toggle('dark',t!=='light');}catch(e){}})();`,
           }}
         />
+        {/* Cloudflare Web Analytics (só carrega se houver token configurado) */}
+        {config.cfAnalyticsToken && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${config.cfAnalyticsToken}"}`}
+          />
+        )}
       </head>
       <body>{children}</body>
     </html>
