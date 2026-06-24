@@ -41,10 +41,30 @@ export const profile = {
   // Coloque sua foto em /public/profile.jpg
   photo: "/profile.jpg",
   photoFallback: "/profile.svg",
-  // Coloque seu currículo em /public/cv.pdf
-  cv: "/cv.pdf",
+  // Página de currículo imprimível (botão "Baixar CV" abre /cv)
+  cv: "/cv",
   site: "https://mazzo.vittalix.com.br",
 };
+
+/* Formação acadêmica e certificações */
+export const education = [
+  {
+    type: "Graduação",
+    title: "Análise e Desenvolvimento de Sistemas",
+    org: "Universidade de Marília (Unimar)",
+    period: "Último semestre · em curso",
+    url: "https://portal.unimar.br/",
+    current: true,
+  },
+  {
+    type: "Certificação",
+    title: "Certificação em LGPD (Lei Geral de Proteção de Dados)",
+    org: "Universidade de Marília (Unimar)",
+    period: "Concluída",
+    url: "https://portal.unimar.br/",
+    current: false,
+  },
+];
 
 export const socials = {
   linkedin: "https://www.linkedin.com/in/guilhermemazzoo/",
@@ -351,6 +371,7 @@ export const navLinks = [
   { label: "Sobre", href: "#sobre" },
   { label: "ProntuIA", href: "#prontuia" },
   { label: "Projetos", href: "#projetos" },
-  { label: "Stack", href: "#stack" },
+  { label: "Tecnologias", href: "#stack" },
+  { label: "Formação", href: "#formacao" },
   { label: "Contato", href: "#contato" },
 ];

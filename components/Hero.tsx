@@ -107,7 +107,12 @@ export default function Hero() {
               className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </a>
-          <a href={profile.cv} download className="btn-ghost w-full sm:w-auto">
+          <a
+            href={profile.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost w-full sm:w-auto"
+          >
             <Download size={15} />
             Baixar CV
           </a>

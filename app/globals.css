@@ -199,6 +199,30 @@ html {
   }
 }
 
+/* ---- Página de currículo (/cv): fundo branco, sempre claro ---- */
+body:has(.cv-page) {
+  background: #ffffff !important;
+}
+body:has(.cv-page)::before,
+body:has(.cv-page)::after {
+  display: none !important;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  @page {
+    margin: 14mm;
+  }
+  .cv-page {
+    max-width: 100% !important;
+  }
+  body {
+    background: #fff !important;
+  }
+}
+
 /* Marquee infinito para o ticker de stack */
 @keyframes marquee {
   from {

@@ -24,8 +24,8 @@ export default function Capabilities() {
     <section id="stack" className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Competências"
-          title="Stack full-stack moderno"
+          eyebrow="Tecnologias"
+          title="As ferramentas que eu domino"
           description="Do banco de dados e da orquestração por IA à segurança de borda — o ciclo completo de um produto SaaS."
         />
 

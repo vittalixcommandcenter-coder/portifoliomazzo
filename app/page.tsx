@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Capabilities from "@/components/Capabilities";
+import Education from "@/components/Education";
 import Flagship from "@/components/Flagship";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,6 +17,7 @@ export default function Home() {
         <Flagship />
         <Projects />
         <Capabilities />
+        <Education />
       </main>
       <Footer />
     </>
