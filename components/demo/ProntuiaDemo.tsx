@@ -8,6 +8,7 @@ import {
   ConsultScreen,
   DashboardScreen,
   SigningScreen,
+  TeleconsultScreen,
   VittalisScreen,
 } from "./screens";
 import {
@@ -41,7 +42,9 @@ export default function ProntuiaDemo() {
       case "Agenda":
         return <AgendaScreen onOpen={() => setActive("Consulta")} />;
       case "Consulta":
-        return <ConsultScreen />;
+        return <ConsultScreen onTelemedicine={() => setActive("Teleconsulta")} />;
+      case "Teleconsulta":
+        return <TeleconsultScreen onBack={() => setActive("Consulta")} />;
       case "Pacientes":
         return <PacientesScreen />;
       case "Especialistas":
@@ -71,8 +74,9 @@ export default function ProntuiaDemo() {
     }
   };
 
-  // "Consulta" mantém "Agenda" destacada na sidebar
-  const activeSidebar = active === "Consulta" ? "Agenda" : active;
+  // Consulta/Teleconsulta fazem parte do fluxo de atendimento -> destacam "Agenda"
+  const activeSidebar =
+    active === "Consulta" || active === "Teleconsulta" ? "Agenda" : active;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-black/15 bg-[#f7f8fb] shadow-lift">

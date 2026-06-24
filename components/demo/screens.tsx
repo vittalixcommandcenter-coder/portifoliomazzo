@@ -2,14 +2,13 @@
 
 import { motion } from "framer-motion";
 import {
-  Activity,
   ArrowRight,
   Check,
+  ChevronLeft,
   FileSignature,
   Lightbulb,
   Mic,
   MonitorUp,
-  Paperclip,
   PhoneOff,
   Send,
   ShieldCheck,
@@ -127,7 +126,7 @@ export function DashboardScreen() {
 }
 
 /* --------------------------- CONSULTA SOAP --------------------------- */
-export function ConsultScreen() {
+export function ConsultScreen({ onTelemedicine }: { onTelemedicine?: () => void }) {
   const c = demoConsult;
   const [analyzed, setAnalyzed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -222,12 +221,20 @@ export function ConsultScreen() {
             </div>
           </div>
         </div>
-        <span
-          className="rounded-lg px-3 py-1.5 text-[11px] font-semibold text-white"
-          style={{ background: V }}
-        >
-          Finalizar
-        </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onTelemedicine}
+            className="flex items-center gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-[11px] font-semibold text-violet-600 transition-colors hover:bg-violet-100"
+          >
+            <Video size={13} /> Iniciar telemedicina
+          </button>
+          <span
+            className="rounded-lg px-3 py-1.5 text-[11px] font-semibold text-white"
+            style={{ background: V }}
+          >
+            Finalizar
+          </span>
+        </div>
       </div>
 
       {/* vitais */}
@@ -507,26 +514,25 @@ export function SigningScreen() {
   );
 }
 
-/* ----------------- VITTALIS (IA) + TELEMEDICINA ---------------------- */
+/* ----------------------- VITTALIS (IA) — só chat --------------------- */
 export function VittalisScreen() {
-  const [inCall, setInCall] = useState(false);
-
   return (
-    <div className="grid gap-3 text-slate-700 lg:grid-cols-2">
-      {/* chat Vittalis */}
+    <div className="mx-auto max-w-xl text-slate-700">
       <div className={`${cardCls} flex flex-col p-0`}>
         <div className="flex items-center gap-2 border-b border-slate-100 p-3">
           <div className="grid h-8 w-8 place-items-center rounded-lg bg-violet-100">
             <Sparkles size={15} style={{ color: V }} />
           </div>
-          <div>
+          <div className="flex-1">
             <div className="text-xs font-semibold text-slate-800">Vittalis</div>
             <div className="text-[10px] text-slate-400">Assistente IA · Resumido</div>
           </div>
+          <span className="rounded-full bg-violet-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-violet-600">
+            Online
+          </span>
         </div>
 
-        <div className="flex-1 space-y-2 p-3">
-          {/* pergunta */}
+        <div className="flex-1 space-y-2 p-4">
           <div className="flex justify-end">
             <div
               className="max-w-[80%] rounded-2xl rounded-tr-sm px-3 py-2 text-[11px] text-white"
@@ -535,7 +541,6 @@ export function VittalisScreen() {
               {demoVittalisQuestion}
             </div>
           </div>
-          {/* resposta */}
           <div className="max-w-[88%] space-y-0.5 rounded-2xl rounded-tl-sm bg-slate-100 px-3 py-2.5">
             {demoVittalisAnswer.map((l, i) =>
               l.type === "h" ? (
@@ -565,42 +570,95 @@ export function VittalisScreen() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* telemedicina */}
-      <div className={`${cardCls} flex flex-col overflow-hidden p-0`}>
-        <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-slate-800 to-slate-950">
-          <div className="absolute inset-0 grid place-items-center text-slate-500">
-            <span className="text-[11px]">Aguardando paciente entrar…</span>
+/* --------------------------- TELECONSULTA ---------------------------- */
+export function TeleconsultScreen({ onBack }: { onBack?: () => void }) {
+  const [inCall, setInCall] = useState(true);
+
+  return (
+    <div className="text-slate-700">
+      {onBack && (
+        <button
+          onClick={onBack}
+          className="mb-3 flex items-center gap-1.5 text-[11px] font-medium text-slate-500 transition-colors hover:text-violet-600"
+        >
+          <ChevronLeft size={13} /> Voltar à consulta
+        </button>
+      )}
+
+      <div className="grid gap-3 lg:grid-cols-[1fr_280px]">
+        {/* sala de vídeo */}
+        <div className="overflow-hidden rounded-xl border border-black/10 bg-slate-950">
+          <div className="relative aspect-video w-full bg-gradient-to-br from-slate-800 to-slate-950">
+            <div className="absolute inset-0 grid place-items-center text-slate-500">
+              <span className="text-[11px]">Aguardando paciente entrar…</span>
+            </div>
+            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+              <span className="text-[10px] text-white">Ao vivo</span>
+            </div>
+            <div className="absolute bottom-3 left-3 text-[11px] font-medium text-white">
+              Guilherme Oliveira · Cardiologia
+            </div>
+            <div className="absolute bottom-3 right-3 h-14 w-20 rounded-md border border-white/15 bg-slate-700" />
           </div>
-          <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/40 px-2 py-1 backdrop-blur">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-            <span className="text-[10px] text-white">Ao vivo</span>
-          </div>
-          <div className="absolute bottom-3 left-3 text-[11px] font-medium text-white">
-            Guilherme Oliveira · Cardiologia
-          </div>
-          <div className="absolute bottom-3 right-3 h-12 w-16 rounded-md border border-white/15 bg-slate-700" />
-        </div>
-        <div className="flex items-center justify-center gap-2 p-3">
-          {[Mic, Video, MonitorUp].map((Icon, i) => (
-            <button key={i} className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition-colors hover:bg-slate-200">
-              <Icon size={15} />
+          <div className="flex items-center justify-center gap-2 bg-slate-900 p-3">
+            {[Mic, Video, MonitorUp].map((Icon, i) => (
+              <button
+                key={i}
+                className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-slate-200 transition-colors hover:bg-white/20"
+              >
+                <Icon size={15} />
+              </button>
+            ))}
+            <button
+              className="grid h-9 w-9 place-items-center rounded-full text-white"
+              style={{ background: V }}
+              title="Vittalis ao vivo"
+            >
+              <Sparkles size={15} />
             </button>
-          ))}
-          <button
-            className="grid h-9 w-9 place-items-center rounded-full text-white"
-            style={{ background: V }}
-          >
-            <Sparkles size={15} />
-          </button>
-          <button
-            onClick={() => setInCall((v) => !v)}
-            className={`grid h-9 w-9 place-items-center rounded-full text-white transition-colors ${
-              inCall ? "bg-slate-300" : "bg-red-500 hover:bg-red-600"
-            }`}
-          >
-            <PhoneOff size={15} />
-          </button>
+            <button
+              onClick={() => setInCall((v) => !v)}
+              className={`grid h-9 w-9 place-items-center rounded-full text-white transition-colors ${
+                inCall ? "bg-red-500 hover:bg-red-600" : "bg-slate-500"
+              }`}
+              title={inCall ? "Encerrar" : "Reconectar"}
+            >
+              <PhoneOff size={15} />
+            </button>
+          </div>
+        </div>
+
+        {/* painel lateral: paciente + chat */}
+        <div className="space-y-3">
+          <div className={`${cardCls} p-3`}>
+            <div className="flex items-center gap-2">
+              <div className="grid h-8 w-8 place-items-center rounded-lg text-[10px] font-semibold text-white" style={{ background: V }}>
+                GO
+              </div>
+              <div>
+                <div className="text-[11px] font-semibold text-slate-800">Guilherme Oliveira</div>
+                <div className="text-[9px] text-slate-400">28 anos · Particular</div>
+              </div>
+            </div>
+            <div className="mt-2 rounded-lg bg-slate-50 px-2 py-1.5 text-[10px] text-slate-400">
+              Prontuário: aguardando documentação…
+            </div>
+          </div>
+          <div className={`${cardCls} flex h-40 flex-col p-3`}>
+            <span className="text-[10px] font-semibold text-slate-600">Chat</span>
+            <div className="flex flex-1 items-center justify-center text-[10px] text-slate-300">
+              Nenhuma mensagem ainda.
+            </div>
+            <div className="flex items-center gap-2 rounded-lg border border-slate-200 px-2 py-1.5">
+              <span className="flex-1 text-[10px] text-slate-300">Mensagem…</span>
+              <Send size={12} style={{ color: V }} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
