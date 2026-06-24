@@ -83,10 +83,10 @@ export const company = {
  * ------------------------------------------------------------------ */
 export const config = {
   // WhatsApp: número completo com DDI e DDD, só dígitos (ex: 5518999998888)
-  whatsapp: "5518000000000", // TODO: troque pelo seu número real
+  whatsapp: "5518997696411", // TODO: troque pelo seu número real
   whatsappMessage: "Olá Guilherme! Vi seu portfólio e gostaria de conversar.",
   // Web3Forms: crie grátis em https://web3forms.com (leva 30s) e cole a access key
-  web3formsKey: "SUA_ACCESS_KEY_AQUI", // TODO: troque pela sua key do Web3Forms
+  web3formsKey: "c91747c7-072f-4586-b0e8-bf1a7f6b6fea", // TODO: troque pela sua key do Web3Forms
   // Cloudflare Web Analytics: cole o token do beacon (Dash > Web Analytics)
   cfAnalyticsToken: "", // opcional; deixe vazio se não usar
 };
