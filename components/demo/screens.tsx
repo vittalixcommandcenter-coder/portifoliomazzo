@@ -132,6 +132,68 @@ export function ConsultScreen() {
   const [analyzed, setAnalyzed] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // SOAP editável (estado por campo)
+  const [soap, setSoap] = useState<Record<string, string>>(() =>
+    Object.fromEntries(c.soap.map((s) => [s.key, s.filled]))
+  );
+  const [listening, setListening] = useState(false);
+  const [micError, setMicError] = useState<string | null>(null);
+
+  // Transcrição de voz real via Web Speech API (Chrome/Edge).
+  const toggleMic = () => {
+    if (typeof window === "undefined") return;
+    const SR =
+      (window as unknown as { SpeechRecognition?: unknown; webkitSpeechRecognition?: unknown })
+        .SpeechRecognition ||
+      (window as unknown as { webkitSpeechRecognition?: unknown }).webkitSpeechRecognition;
+
+    if (!SR) {
+      setMicError("Transcrição por voz requer Chrome ou Edge.");
+      setTimeout(() => setMicError(null), 3500);
+      return;
+    }
+    if (listening) {
+      setListening(false);
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rec = new (SR as any)();
+    rec.lang = "pt-BR";
+    rec.interimResults = true;
+    rec.continuous = true;
+
+    let base = "";
+    setListening(true);
+    setSoap((prev) => {
+      base = prev.S ? prev.S + " " : "";
+      return prev;
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (e: any) => {
+      let txt = "";
+      for (let i = 0; i < e.results.length; i++) txt += e.results[i][0].transcript;
+      setSoap((prev) => ({ ...prev, S: base + txt }));
+    };
+    rec.onerror = () => {
+      setMicError("Não foi possível acessar o microfone.");
+      setListening(false);
+      setTimeout(() => setMicError(null), 3500);
+    };
+    rec.onend = () => setListening(false);
+
+    rec.start();
+    // guarda referência para parar
+    (window as unknown as { __demoRec?: unknown }).__demoRec = rec;
+  };
+
+  // garante parada ao desativar
+  if (typeof window !== "undefined" && !listening) {
+    const r = (window as unknown as { __demoRec?: { stop?: () => void } }).__demoRec;
+    r?.stop?.();
+  }
+
   const suggest = () => {
     setLoading(true);
     setAnalyzed(false);
@@ -187,14 +249,33 @@ export function ConsultScreen() {
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-700">Evolução Clínica (SOAP)</span>
           <div className="flex items-center gap-3 text-[10px] font-medium">
-            <span className="flex items-center gap-1 text-slate-500">
-              <Mic size={11} /> Transcrever Áudio
-            </span>
+            <button
+              onClick={toggleMic}
+              className={`flex items-center gap-1 rounded-full px-2 py-1 transition-colors ${
+                listening ? "bg-rose-50 text-rose-500" : "text-slate-500 hover:bg-slate-100"
+              }`}
+            >
+              {listening ? (
+                <>
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-rose-500" /> Ouvindo… (parar)
+                </>
+              ) : (
+                <>
+                  <Mic size={11} /> Transcrever Áudio
+                </>
+              )}
+            </button>
             <span className="flex items-center gap-1" style={{ color: V }}>
               <Sparkles size={11} /> Gerar SOAP via IA
             </span>
           </div>
         </div>
+
+        {micError && (
+          <div className="mb-2 rounded-lg bg-amber-50 px-3 py-1.5 text-[10px] font-medium text-amber-600">
+            {micError}
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-2.5">
           {c.soap.map((s) => (
@@ -207,6 +288,9 @@ export function ConsultScreen() {
                   {s.key}
                 </span>
                 <span className="text-[11px] font-medium text-slate-600">{s.title}</span>
+                {s.key === "S" && listening && (
+                  <span className="ml-auto text-[9px] font-medium text-rose-500">● gravando</span>
+                )}
                 {s.key === "A" && (
                   <button
                     onClick={suggest}
@@ -216,9 +300,15 @@ export function ConsultScreen() {
                   </button>
                 )}
               </div>
-              <div className="min-h-[52px] rounded-lg border border-slate-200 bg-slate-50/60 p-2 text-[11px] leading-relaxed text-slate-600">
-                {s.filled || <span className="text-slate-300">{s.placeholder}</span>}
-              </div>
+              <textarea
+                value={soap[s.key]}
+                onChange={(e) => setSoap((p) => ({ ...p, [s.key]: e.target.value }))}
+                placeholder={s.placeholder}
+                rows={2}
+                className={`min-h-[52px] w-full resize-none rounded-lg border bg-slate-50/60 p-2 text-[11px] leading-relaxed text-slate-700 outline-none transition-colors placeholder:text-slate-300 focus:bg-white ${
+                  s.key === "S" && listening ? "border-rose-300 ring-1 ring-rose-200" : "border-slate-200 focus:border-violet-300"
+                }`}
+              />
             </div>
           ))}
         </div>
