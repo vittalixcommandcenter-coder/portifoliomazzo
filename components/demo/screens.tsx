@@ -592,18 +592,37 @@ export function TeleconsultScreen({ onBack }: { onBack?: () => void }) {
       <div className="grid gap-3 lg:grid-cols-[1fr_280px]">
         {/* sala de vídeo */}
         <div className="overflow-hidden rounded-xl border border-black/10 bg-slate-950">
-          <div className="relative aspect-video w-full bg-gradient-to-br from-slate-800 to-slate-950">
-            <div className="absolute inset-0 grid place-items-center text-slate-500">
-              <span className="text-[11px]">Aguardando paciente entrar…</span>
-            </div>
+          <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
+            {/* feed principal: paciente */}
+            <video
+              className="h-full w-full object-cover"
+              src="/telemed-patient.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
             <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
               <span className="text-[10px] text-white">Ao vivo</span>
             </div>
-            <div className="absolute bottom-3 left-3 text-[11px] font-medium text-white">
+            <div className="absolute bottom-3 left-3 rounded-md bg-black/40 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur">
               Guilherme Oliveira · Cardiologia
             </div>
-            <div className="absolute bottom-3 right-3 h-14 w-20 rounded-md border border-white/15 bg-slate-700" />
+            {/* PiP: médico */}
+            <div className="absolute bottom-3 right-3 h-16 w-24 overflow-hidden rounded-md border border-white/20 shadow-lg">
+              <video
+                className="h-full w-full object-cover"
+                src="/telemed-doctor.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+              <span className="absolute bottom-0.5 left-1 text-[8px] font-medium text-white/90">
+                Dr. Você
+              </span>
+            </div>
           </div>
           <div className="flex items-center justify-center gap-2 bg-slate-900 p-3">
             {[Mic, Video, MonitorUp].map((Icon, i) => (
