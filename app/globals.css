@@ -24,9 +24,10 @@
 
   --c-ice: 245 245 247;
 
-  --c-copper: 196 122 82;
-  --c-copper-soft: 217 152 115;
-  --c-copper-deep: 168 98 62;
+  /* Acento da marca (roxo Vittalix) — nome "copper" mantido por compat. */
+  --c-copper: 124 92 255;
+  --c-copper-soft: 151 124 255;
+  --c-copper-deep: 99 70 224;
 
   /* tokens de superfície de vidro / bordas, dependentes de tema */
   --glass-bg: 255 255 255;
@@ -58,9 +59,9 @@
 
   --c-ice: 23 24 26;         /* "ice" no claro = texto escuro forte */
 
-  --c-copper: 168 98 62;     /* cobre um tom mais escuro p/ contraste */
-  --c-copper-soft: 138 78 48;
-  --c-copper-deep: 110 60 36;
+  --c-copper: 109 76 240;    /* roxo um tom mais forte p/ contraste no claro */
+  --c-copper-soft: 124 92 255;
+  --c-copper-deep: 88 58 210;
 
   --glass-bg: 20 20 22;
   --glass-bg-alpha: 0.02;
@@ -135,7 +136,7 @@ html {
   /* Botão primário: cobre (CTA com cor, sóbrio) */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-graphite-950 transition-all duration-300 hover:bg-copper-soft;
-    box-shadow: 0 8px 30px -10px rgba(196, 122, 82, 0.5);
+    box-shadow: 0 8px 30px -10px rgb(var(--c-copper) / 0.5);
   }
 
   /* Botão secundário: contorno de vidro */

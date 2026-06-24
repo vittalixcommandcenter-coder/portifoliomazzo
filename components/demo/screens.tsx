@@ -3,106 +3,121 @@
 import { motion } from "framer-motion";
 import {
   Activity,
-  CalendarDays,
+  ArrowRight,
   Check,
-  ChevronRight,
+  FileSignature,
+  Lightbulb,
   Mic,
-  Phone,
-  Pill,
+  MonitorUp,
+  Paperclip,
+  PhoneOff,
+  Send,
+  ShieldCheck,
   Sparkles,
-  TriangleAlert,
+  Upload,
   Video,
 } from "lucide-react";
 import { useState } from "react";
 import {
-  demoAISuggestions,
-  demoAISymptoms,
-  demoAgenda,
+  demoConsult,
+  demoDifferentials,
+  demoExecSummary,
   demoMetrics,
-  demoPatients,
-  demoRecord,
+  demoNextPatients,
+  demoSigning,
+  demoVittalisAnswer,
+  demoVittalisChips,
+  demoVittalisQuestion,
 } from "@/lib/demoData";
 
-/* Paleta interna do demo (independe do tema do site para parecer "um app").
-   Sempre escura, com cobre, para dar identidade de produto. */
-const card = "rounded-xl border border-white/[0.06] bg-white/[0.02]";
+/* Paleta interna do demo — CLARA + ROXO, fiel ao ProntuIA real.
+   Independe do tema do site para parecer "a tela do produto". */
+const V = "#7c5cff"; // violeta principal
 
-function StatusDot({ status }: { status: string }) {
-  const color =
-    status === "Em atendimento"
-      ? "bg-copper"
-      : status === "Aguardando"
-        ? "bg-amber-400/80"
-        : status === "Concluído"
-          ? "bg-emerald-400/70"
-          : "bg-platinum-500";
-  return <span className={`h-1.5 w-1.5 rounded-full ${color}`} />;
-}
+const cardCls =
+  "rounded-xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]";
 
 /* ----------------------------- DASHBOARD ----------------------------- */
 export function DashboardScreen() {
   return (
-    <div className="space-y-4">
-      <div>
-        <h3 className="font-display text-lg font-semibold text-white">
-          Bom dia, Dra. Marina 👋
+    <div className="space-y-4 text-slate-700">
+      {/* saudação com barra roxa */}
+      <div className={`${cardCls} relative overflow-hidden p-5`}>
+        <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-violet-500 to-violet-400" />
+        <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">
+          Terça-feira, 23 de junho
+        </p>
+        <h3 className="mt-1 font-display text-xl font-semibold text-slate-900">
+          Boa noite, Guilherme
         </h3>
-        <p className="text-xs text-platinum-400">Resumo da clínica · Hoje</p>
+        <div className="mt-3 flex items-start gap-2 rounded-lg bg-violet-50 p-3">
+          <Sparkles size={14} className="mt-0.5 shrink-0" style={{ color: V }} />
+          <p className="text-[11px] leading-relaxed text-slate-600">
+            <span className="font-semibold text-slate-700">Resumo executivo:</span>{" "}
+            {demoExecSummary}
+          </p>
+        </div>
+        <div className="mt-3 flex gap-1.5">
+          {["Semana", "Mês", "Ano"].map((t, i) => (
+            <span
+              key={t}
+              className={`rounded-full px-3 py-1 text-[11px] font-medium ${
+                i === 0 ? "text-white" : "bg-slate-100 text-slate-500"
+              }`}
+              style={i === 0 ? { background: V } : undefined}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* métricas */}
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
         {demoMetrics.map((m) => (
-          <div key={m.label} className={`${card} p-3`}>
-            <div className="text-[10px] uppercase tracking-wide text-platinum-500">
+          <div key={m.label} className={`${cardCls} p-3.5`}>
+            <div className="flex items-center justify-between">
+              <m.icon size={15} className="text-slate-400" />
+              <span className="text-[10px] font-medium text-violet-500">{m.trend}</span>
+            </div>
+            <div className="mt-2 font-display text-2xl font-semibold text-slate-900">
+              {m.value}
+            </div>
+            <div className="text-[10px] uppercase tracking-wide text-slate-400">
               {m.label}
             </div>
-            <div className="mt-1 flex items-baseline gap-1.5">
-              <span className="font-display text-xl font-semibold text-white">
-                {m.value}
-              </span>
-              <span className="text-[10px] font-medium text-copper-soft">
-                {m.delta}
-              </span>
-            </div>
+            <div className="mt-0.5 text-[10px] text-slate-400">{m.sub}</div>
           </div>
         ))}
       </div>
 
-      {/* próximos atendimentos */}
-      <div className={`${card} p-4`}>
+      {/* próximos pacientes */}
+      <div className={`${cardCls} p-4`}>
         <div className="mb-3 flex items-center justify-between">
-          <span className="text-xs font-medium text-platinum-200">
-            Próximos atendimentos
+          <span className="text-xs font-semibold text-slate-700">Próximos pacientes</span>
+          <span className="flex items-center gap-1 text-[10px] font-medium" style={{ color: V }}>
+            Ver agenda <ArrowRight size={11} />
           </span>
-          <span className="text-[10px] text-platinum-500">Ver agenda</span>
         </div>
-        <div className="space-y-1.5">
-          {demoPatients.map((p) => (
+        <div className="space-y-1">
+          {demoNextPatients.map((p) => (
             <div
-              key={p.id}
-              className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-white/[0.03]"
+              key={p.name}
+              className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-slate-50"
             >
-              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-copper/15 text-[11px] font-semibold text-copper-soft">
+              <div
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[11px] font-semibold text-white"
+                style={{ background: V }}
+              >
                 {p.initials}
               </div>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium text-platinum-100">
-                  {p.name}
-                </div>
-                <div className="truncate text-[11px] text-platinum-500">
-                  {p.reason}
-                </div>
+                <div className="truncate text-sm font-medium text-slate-800">{p.name}</div>
+                <div className="truncate text-[11px] text-slate-400">{p.info}</div>
               </div>
-              <div className="text-right">
-                <div className="text-xs font-medium text-platinum-200">
-                  {p.time}
-                </div>
-                <div className="flex items-center justify-end gap-1 text-[10px] text-platinum-500">
-                  <StatusDot status={p.status} />
-                  {p.status}
-                </div>
-              </div>
+              <span className="rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-medium text-violet-600">
+                {p.status}
+              </span>
             </div>
           ))}
         </div>
@@ -111,313 +126,391 @@ export function DashboardScreen() {
   );
 }
 
-/* --------------------------- PRONTUÁRIO ------------------------------ */
-export function RecordScreen() {
-  const r = demoRecord;
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <div className="grid h-11 w-11 place-items-center rounded-full bg-copper/15 text-sm font-semibold text-copper-soft">
-          {r.patient.initials}
-        </div>
-        <div>
-          <h3 className="font-display text-base font-semibold text-white">
-            {r.patient.name}
-          </h3>
-          <p className="text-[11px] text-platinum-400">
-            {r.patient.age} anos · Prontuário #00{r.patient.id.slice(1)}
-          </p>
-        </div>
-      </div>
-
-      {/* sinais vitais */}
-      <div className="grid grid-cols-4 gap-2">
-        {r.vitals.map((v) => (
-          <div key={v.label} className={`${card} p-2.5 text-center`}>
-            <div className="text-[9px] uppercase text-platinum-500">{v.label}</div>
-            <div className="mt-0.5 font-display text-sm font-semibold text-white">
-              {v.value}
-            </div>
-            <div className="text-[9px] text-platinum-500">{v.unit}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid gap-3 sm:grid-cols-[1.6fr_1fr]">
-        {/* timeline */}
-        <div className={`${card} p-4`}>
-          <span className="text-xs font-medium text-platinum-200">
-            Evolução clínica
-          </span>
-          <div className="mt-3 space-y-3">
-            {r.timeline.map((t, i) => (
-              <div key={i} className="flex gap-3">
-                <div className="flex flex-col items-center">
-                  <span className="h-2 w-2 rounded-full bg-copper" />
-                  {i < r.timeline.length - 1 && (
-                    <span className="mt-1 w-px flex-1 bg-white/[0.08]" />
-                  )}
-                </div>
-                <div className="pb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-platinum-100">
-                      {t.title}
-                    </span>
-                    <span className="text-[10px] text-platinum-500">{t.date}</span>
-                  </div>
-                  <p className="mt-0.5 text-[11px] leading-relaxed text-platinum-400">
-                    {t.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* alergias + medicações */}
-        <div className="space-y-3">
-          <div className={`${card} p-3`}>
-            <div className="flex items-center gap-1.5">
-              <TriangleAlert size={12} className="text-amber-400/80" />
-              <span className="text-[11px] font-medium text-platinum-200">
-                Alergias
-              </span>
-            </div>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {r.allergies.map((a) => (
-                <span
-                  key={a}
-                  className="rounded-md bg-amber-400/10 px-2 py-0.5 text-[10px] text-amber-300/90"
-                >
-                  {a}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className={`${card} p-3`}>
-            <div className="flex items-center gap-1.5">
-              <Pill size={12} className="text-copper-soft" />
-              <span className="text-[11px] font-medium text-platinum-200">
-                Medicações
-              </span>
-            </div>
-            <div className="mt-2 space-y-1">
-              {r.meds.map((m) => (
-                <div key={m} className="text-[11px] text-platinum-300">
-                  {m}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* --------------------------- CO-PILOTO IA ---------------------------- */
-export function AIScreen() {
+/* --------------------------- CONSULTA SOAP --------------------------- */
+export function ConsultScreen() {
+  const c = demoConsult;
   const [analyzed, setAnalyzed] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const run = () => {
+  const suggest = () => {
     setLoading(true);
     setAnalyzed(false);
     setTimeout(() => {
       setLoading(false);
       setAnalyzed(true);
-    }, 1100);
+    }, 1000);
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <Sparkles size={16} className="text-copper-soft" />
-        <h3 className="font-display text-base font-semibold text-white">
-          Co-Piloto clínico
-        </h3>
-        <span className="rounded-full bg-copper/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-copper-soft">
-          IA
+    <div className="space-y-4 text-slate-700">
+      {/* cabeçalho do paciente */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div
+            className="grid h-9 w-9 place-items-center rounded-lg text-xs font-semibold text-white"
+            style={{ background: V }}
+          >
+            {c.patient.initials}
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-slate-900">{c.patient.name}</div>
+            <div className="text-[11px] text-slate-400">
+              Consulta de rotina · {c.patient.age} anos ·{" "}
+              <span className="text-emerald-500">● {c.timer}</span>
+            </div>
+          </div>
+        </div>
+        <span
+          className="rounded-lg px-3 py-1.5 text-[11px] font-semibold text-white"
+          style={{ background: V }}
+        >
+          Finalizar
         </span>
       </div>
 
-      {/* sintomas */}
-      <div className={`${card} p-4`}>
-        <span className="text-[11px] font-medium text-platinum-300">
-          Sintomas registrados na consulta
-        </span>
-        <div className="mt-2.5 flex flex-wrap gap-1.5">
-          {demoAISymptoms.map((s) => (
-            <span
-              key={s}
-              className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-platinum-200"
-            >
-              {s}
+      {/* vitais */}
+      <div className="grid grid-cols-2 gap-2.5">
+        {c.vitals.map((v) => (
+          <div key={v.label} className={`${cardCls} p-3`}>
+            <div className="text-[10px] uppercase tracking-wide text-slate-400">
+              {v.label}
+            </div>
+            <div className="mt-0.5 font-display text-base font-semibold text-slate-900">
+              {v.value}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* SOAP */}
+      <div className={`${cardCls} p-4`}>
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-xs font-semibold text-slate-700">Evolução Clínica (SOAP)</span>
+          <div className="flex items-center gap-3 text-[10px] font-medium">
+            <span className="flex items-center gap-1 text-slate-500">
+              <Mic size={11} /> Transcrever Áudio
             </span>
+            <span className="flex items-center gap-1" style={{ color: V }}>
+              <Sparkles size={11} /> Gerar SOAP via IA
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2.5">
+          {c.soap.map((s) => (
+            <div key={s.key}>
+              <div className="mb-1 flex items-center gap-1.5">
+                <span
+                  className="grid h-4 w-4 place-items-center rounded-full text-[9px] font-bold text-white"
+                  style={{ background: V }}
+                >
+                  {s.key}
+                </span>
+                <span className="text-[11px] font-medium text-slate-600">{s.title}</span>
+                {s.key === "A" && (
+                  <button
+                    onClick={suggest}
+                    className="ml-auto flex items-center gap-1 text-[10px] font-semibold text-amber-500"
+                  >
+                    <Lightbulb size={10} /> Sugerir diferenciais
+                  </button>
+                )}
+              </div>
+              <div className="min-h-[52px] rounded-lg border border-slate-200 bg-slate-50/60 p-2 text-[11px] leading-relaxed text-slate-600">
+                {s.filled || <span className="text-slate-300">{s.placeholder}</span>}
+              </div>
+            </div>
           ))}
         </div>
-        <button
-          onClick={run}
-          disabled={loading}
-          className="mt-3.5 inline-flex items-center gap-2 rounded-lg bg-copper px-3.5 py-2 text-xs font-semibold text-graphite-950 transition-all hover:bg-copper-soft disabled:opacity-60"
+
+        {/* sugestões IA */}
+        {(loading || analyzed) && (
+          <div className="mt-3 rounded-lg border border-violet-100 bg-violet-50/50 p-3">
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold" style={{ color: V }}>
+              <Sparkles size={12} />
+              {loading ? "Analisando sintomas…" : "Diagnósticos diferenciais sugeridos"}
+            </div>
+            {analyzed && (
+              <div className="mt-2 space-y-1.5">
+                {demoDifferentials.map((d) => (
+                  <motion.div
+                    key={d.cid}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="rounded bg-white px-1.5 py-0.5 font-mono text-[9px] text-slate-500 ring-1 ring-slate-200">
+                      {d.cid}
+                    </span>
+                    <span className="text-[11px] text-slate-700">{d.name}</span>
+                    <div className="ml-auto flex items-center gap-1.5">
+                      <div className="h-1 w-14 overflow-hidden rounded-full bg-slate-200">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${d.confidence}%` }}
+                          transition={{ duration: 0.7 }}
+                          className="h-full rounded-full"
+                          style={{ background: V }}
+                        />
+                      </div>
+                      <span className="w-7 text-right text-[10px] font-semibold text-violet-600">
+                        {d.confidence}%
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="mt-3 flex gap-2">
+          <span className="rounded-lg px-3 py-1.5 text-[11px] font-semibold text-white" style={{ background: V }}>
+            Prescrever
+          </span>
+          <span className="rounded-lg border border-slate-200 px-3 py-1.5 text-[11px] font-medium text-slate-500">
+            Atestado / Laudo
+          </span>
+          <span className="rounded-lg border border-slate-200 px-3 py-1.5 text-[11px] font-medium text-slate-500">
+            Solicitar Exames
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------- ASSINATURA ICP-BRASIL ----------------------- */
+export function SigningScreen() {
+  const s = demoSigning;
+  const [tab, setTab] = useState<"sign" | "validate">("sign");
+
+  return (
+    <div className="space-y-4 text-slate-700">
+      <div className="flex items-center gap-2.5">
+        <div
+          className="grid h-9 w-9 place-items-center rounded-lg text-white"
+          style={{ background: V }}
         >
-          {loading ? (
-            <>
-              <span className="h-3 w-3 animate-spin rounded-full border-2 border-graphite-950/40 border-t-graphite-950" />
-              Analisando…
-            </>
-          ) : (
-            <>
-              <Sparkles size={13} />
-              {analyzed ? "Analisar novamente" : "Sugerir diagnósticos"}
-            </>
-          )}
-        </button>
+          <FileSignature size={18} />
+        </div>
+        <div>
+          <h3 className="text-sm font-semibold text-slate-900">Assinar documentos</h3>
+          <p className="text-[11px] text-slate-400">Padrão ICP-Brasil · Motor Vittalix V7</p>
+        </div>
       </div>
 
-      {/* resultados */}
-      {analyzed && (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="space-y-2"
-        >
-          <span className="text-[11px] font-medium text-platinum-400">
-            Diagnósticos diferenciais sugeridos
-          </span>
-          {demoAISuggestions.map((s) => (
-            <motion.div
-              key={s.cid}
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              className={`${card} p-3`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-white/[0.05] px-1.5 py-0.5 font-mono text-[10px] text-platinum-300">
-                    {s.cid}
-                  </span>
-                  <span className="text-sm font-medium text-platinum-100">
-                    {s.name}
-                  </span>
-                </div>
-                <span className="text-xs font-semibold text-copper-soft">
-                  {s.confidence}%
+      {/* abas */}
+      <div className="flex gap-4 border-b border-slate-200 text-[11px] font-medium">
+        {[
+          { k: "sign", label: "Assinar documentos" },
+          { k: "validate", label: "Validador jurídico" },
+        ].map((t) => (
+          <button
+            key={t.k}
+            onClick={() => setTab(t.k as "sign" | "validate")}
+            className={`-mb-px border-b-2 pb-2 transition-colors ${
+              tab === t.k ? "text-slate-900" : "border-transparent text-slate-400"
+            }`}
+            style={tab === t.k ? { borderColor: V } : undefined}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "sign" ? (
+        <div className="grid gap-3 sm:grid-cols-[1fr_1.2fr]">
+          {/* autenticação */}
+          <div className={`${cardCls} p-4`}>
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck size={13} style={{ color: V }} />
+              <span className="text-xs font-semibold text-slate-700">Autenticação</span>
+            </div>
+            <div className="mt-3 flex gap-1 rounded-lg bg-slate-100 p-0.5">
+              {s.modes.map((m, i) => (
+                <span
+                  key={m}
+                  className={`flex-1 rounded-md px-1 py-1 text-center text-[9px] font-medium ${
+                    i === 0 ? "bg-white text-slate-800 shadow-sm" : "text-slate-400"
+                  }`}
+                >
+                  {m}
                 </span>
+              ))}
+            </div>
+            <div className="mt-2.5 rounded-lg border border-slate-200 px-3 py-2 text-[11px] text-slate-600">
+              {s.cert}
+            </div>
+            <div className="mt-2 rounded-lg border border-slate-200 px-3 py-2 text-[11px] text-slate-300">
+              Senha do certificado
+            </div>
+            <button className="mt-3 w-full rounded-lg py-2 text-[11px] font-semibold text-white opacity-80" style={{ background: V }}>
+              Marque o local primeiro
+            </button>
+          </div>
+
+          {/* dropzone */}
+          <div className={`${cardCls} grid place-items-center p-4`}>
+            <div className="grid w-full place-items-center rounded-xl border-2 border-dashed border-slate-200 py-8">
+              <div className="grid h-10 w-10 place-items-center rounded-lg bg-violet-50">
+                <Upload size={18} style={{ color: V }} />
               </div>
-              <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${s.confidence}%` }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="h-full rounded-full bg-copper"
-                />
+              <p className="mt-2 text-[11px] font-medium text-slate-600">Solte o PDF aqui</p>
+              <p className="text-[10px] text-slate-400">Clique para selecionar o documento</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className={`${cardCls} p-4`}>
+            <span className="text-xs font-semibold text-slate-700">
+              Validador de Hash (SHA-256)
+            </span>
+            <div className="mt-3 grid place-items-center rounded-xl border-2 border-dashed border-slate-200 py-6">
+              <Upload size={18} className="text-slate-300" />
+              <p className="mt-1.5 text-[10px] text-slate-400">Arraste o PDF assinado aqui</p>
+            </div>
+            <div className="mt-3 rounded-lg bg-slate-50 px-3 py-2 font-mono text-[10px] text-slate-400">
+              Hash SHA-256 (64 caracteres)
+            </div>
+            <div className="mt-4">
+              <div className="text-[10px] uppercase tracking-wide text-slate-400">
+                Total de assinaturas
               </div>
-              <p className="mt-2 text-[11px] leading-relaxed text-platinum-400">
-                {s.rationale}
+              <div className="font-display text-xl font-semibold text-slate-900">
+                {s.totalSignatures}
+              </div>
+              {s.adoption.map((a) => (
+                <div key={a.label} className="mt-1.5">
+                  <div className="flex justify-between text-[10px] text-slate-500">
+                    <span>{a.label}</span>
+                    <span>{a.value}%</span>
+                  </div>
+                  <div className="mt-0.5 h-1 overflow-hidden rounded-full bg-slate-200">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${a.value}%`,
+                        background: a.value === 100 ? "#10b981" : V,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={`${cardCls} grid place-items-center p-4 text-center`}>
+            <div>
+              <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-slate-50">
+                <ShieldCheck size={22} className="text-slate-300" />
+              </div>
+              <p className="mt-2 text-xs font-medium text-slate-600">Livro de Auditoria Digital</p>
+              <p className="mt-1 text-[10px] leading-relaxed text-slate-400">
+                Carregue um arquivo assinado ou insira o Hash para conferir a validade jurídica.
               </p>
-            </motion.div>
-          ))}
-          <p className="pt-1 text-[10px] italic text-platinum-500">
-            Sugestões geradas por IA — a decisão final é sempre do médico.
-          </p>
-        </motion.div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-/* ------------------------- TELECONSULTA/AGENDA ----------------------- */
-export function TeleconsultScreen() {
+/* ----------------- VITTALIS (IA) + TELEMEDICINA ---------------------- */
+export function VittalisScreen() {
   const [inCall, setInCall] = useState(false);
 
   return (
-    <div className="space-y-4">
-      <div className="grid gap-3 sm:grid-cols-[1fr_1.1fr]">
-        {/* agenda */}
-        <div className={`${card} p-4`}>
-          <div className="mb-3 flex items-center gap-1.5">
-            <CalendarDays size={13} className="text-copper-soft" />
-            <span className="text-xs font-medium text-platinum-200">Agenda</span>
+    <div className="grid gap-3 text-slate-700 lg:grid-cols-2">
+      {/* chat Vittalis */}
+      <div className={`${cardCls} flex flex-col p-0`}>
+        <div className="flex items-center gap-2 border-b border-slate-100 p-3">
+          <div className="grid h-8 w-8 place-items-center rounded-lg bg-violet-100">
+            <Sparkles size={15} style={{ color: V }} />
           </div>
-          <div className="space-y-1">
-            {demoAgenda.map((a) => (
-              <div
-                key={a.time}
-                className={`flex items-center gap-2.5 rounded-lg px-2 py-1.5 ${
-                  a.now ? "bg-copper/10" : ""
-                }`}
-              >
-                <span className="w-9 text-[11px] tabular-nums text-platinum-400">
-                  {a.time}
-                </span>
-                <div className="flex-1">
-                  <div className="text-xs font-medium text-platinum-100">
-                    {a.patient}
-                  </div>
-                  <div className="flex items-center gap-1 text-[10px] text-platinum-500">
-                    {a.type === "Teleconsulta" ? (
-                      <Video size={9} className="text-copper-soft" />
-                    ) : (
-                      <Activity size={9} />
-                    )}
-                    {a.type}
-                  </div>
-                </div>
-                {a.done ? (
-                  <Check size={13} className="text-emerald-400/70" />
-                ) : a.now ? (
-                  <span className="rounded-full bg-copper px-2 py-0.5 text-[9px] font-semibold text-graphite-950">
-                    agora
-                  </span>
-                ) : (
-                  <ChevronRight size={13} className="text-platinum-600" />
-                )}
-              </div>
-            ))}
+          <div>
+            <div className="text-xs font-semibold text-slate-800">Vittalis</div>
+            <div className="text-[10px] text-slate-400">Assistente IA · Resumido</div>
           </div>
         </div>
 
-        {/* sala de vídeo */}
-        <div className={`${card} relative overflow-hidden p-0`}>
-          <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-graphite-800 to-graphite-950">
-            {/* "vídeo" do paciente */}
-            <div className="absolute inset-0 grid place-items-center">
-              <div className="grid h-16 w-16 place-items-center rounded-full bg-copper/15 text-lg font-semibold text-copper-soft">
-                RL
-              </div>
-            </div>
-            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/40 px-2 py-1 backdrop-blur">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-              <span className="text-[10px] text-white">Ao vivo</span>
-            </div>
-            <div className="absolute bottom-3 left-3 text-[11px] font-medium text-white">
-              Rafael Lima · Cardiologia
-            </div>
-            {/* "câmera" do médico (PiP) */}
-            <div className="absolute bottom-3 right-3 h-12 w-16 rounded-md border border-white/15 bg-graphite-700" />
-          </div>
-
-          {/* controles */}
-          <div className="flex items-center justify-center gap-2 p-3">
-            <button className="grid h-9 w-9 place-items-center rounded-full bg-white/[0.06] text-platinum-200 transition-colors hover:bg-white/[0.1]">
-              <Mic size={15} />
-            </button>
-            <button className="grid h-9 w-9 place-items-center rounded-full bg-white/[0.06] text-platinum-200 transition-colors hover:bg-white/[0.1]">
-              <Video size={15} />
-            </button>
-            <button
-              onClick={() => setInCall((v) => !v)}
-              className={`grid h-9 w-9 place-items-center rounded-full text-white transition-colors ${
-                inCall ? "bg-white/[0.06] hover:bg-white/[0.1]" : "bg-red-500/90 hover:bg-red-500"
-              }`}
+        <div className="flex-1 space-y-2 p-3">
+          {/* pergunta */}
+          <div className="flex justify-end">
+            <div
+              className="max-w-[80%] rounded-2xl rounded-tr-sm px-3 py-2 text-[11px] text-white"
+              style={{ background: V }}
             >
-              <Phone size={15} className={inCall ? "" : "rotate-[135deg]"} />
-            </button>
+              {demoVittalisQuestion}
+            </div>
           </div>
+          {/* resposta */}
+          <div className="max-w-[88%] space-y-0.5 rounded-2xl rounded-tl-sm bg-slate-100 px-3 py-2.5">
+            {demoVittalisAnswer.map((l, i) =>
+              l.type === "h" ? (
+                <p key={i} className="text-[11px] font-semibold text-slate-800">{l.text}</p>
+              ) : l.type === "b" ? (
+                <p key={i} className="pt-1 text-[11px] font-semibold text-slate-700">{l.text}</p>
+              ) : l.type === "note" ? (
+                <p key={i} className="pt-1 text-[10px] italic text-slate-400">{l.text}</p>
+              ) : (
+                <p key={i} className="pl-2 text-[11px] text-slate-600">• {l.text}</p>
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="space-y-2 border-t border-slate-100 p-3">
+          <div className="flex flex-wrap gap-1.5">
+            {demoVittalisChips.map((c) => (
+              <span key={c} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-500">
+                {c}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2">
+            <span className="flex-1 text-[11px] text-slate-300">Pergunte à Vittalis…</span>
+            <Send size={14} style={{ color: V }} />
+          </div>
+        </div>
+      </div>
+
+      {/* telemedicina */}
+      <div className={`${cardCls} flex flex-col overflow-hidden p-0`}>
+        <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-slate-800 to-slate-950">
+          <div className="absolute inset-0 grid place-items-center text-slate-500">
+            <span className="text-[11px]">Aguardando paciente entrar…</span>
+          </div>
+          <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/40 px-2 py-1 backdrop-blur">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+            <span className="text-[10px] text-white">Ao vivo</span>
+          </div>
+          <div className="absolute bottom-3 left-3 text-[11px] font-medium text-white">
+            Guilherme Oliveira · Cardiologia
+          </div>
+          <div className="absolute bottom-3 right-3 h-12 w-16 rounded-md border border-white/15 bg-slate-700" />
+        </div>
+        <div className="flex items-center justify-center gap-2 p-3">
+          {[Mic, Video, MonitorUp].map((Icon, i) => (
+            <button key={i} className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition-colors hover:bg-slate-200">
+              <Icon size={15} />
+            </button>
+          ))}
+          <button
+            className="grid h-9 w-9 place-items-center rounded-full text-white"
+            style={{ background: V }}
+          >
+            <Sparkles size={15} />
+          </button>
+          <button
+            onClick={() => setInCall((v) => !v)}
+            className={`grid h-9 w-9 place-items-center rounded-full text-white transition-colors ${
+              inCall ? "bg-slate-300" : "bg-red-500 hover:bg-red-600"
+            }`}
+          >
+            <PhoneOff size={15} />
+          </button>
         </div>
       </div>
     </div>

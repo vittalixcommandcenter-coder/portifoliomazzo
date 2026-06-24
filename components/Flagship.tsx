@@ -162,8 +162,9 @@ export default function Flagship() {
             Não acredite — interaja com o produto
           </h3>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-platinum-400">
-            Uma recriação navegável do ProntuIA com dados fictícios. Explore o
-            painel, o prontuário, a teleconsulta e rode o Co-Piloto de IA.
+            Uma recriação fiel do ProntuIA com dados fictícios. Navegue pelo
+            painel, faça uma consulta com SOAP e IA, explore a assinatura
+            ICP-Brasil e converse com a Vittalis.
           </p>
         </Reveal>
 
