@@ -3,21 +3,24 @@
 import { Loader2, Send } from "lucide-react";
 import { useState } from "react";
 import { config } from "@/lib/data";
+import { useI18n } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const { t } = useI18n();
+  const { form } = t;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const el = e.currentTarget;
+    const data = new FormData(el);
     data.append("access_key", config.web3formsKey);
-    data.append("subject", "Novo contato pelo portfólio");
-    data.append("from_name", "Portfólio Guilherme Mazzo");
+    data.append("subject", form.subject);
+    data.append("from_name", form.fromName);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -27,7 +30,7 @@ export default function ContactForm() {
       const json = await res.json();
       if (json.success) {
         setStatus("ok");
-        form.reset();
+        el.reset();
       } else {
         setStatus("error");
       }
@@ -43,12 +46,8 @@ export default function ContactForm() {
     return (
       <div className="mx-auto max-w-lg rounded-2xl border border-copper/20 bg-copper/[0.05] p-8 text-center">
         <div className="text-2xl">✅</div>
-        <h3 className="mt-2 font-display text-lg font-semibold text-ice">
-          Mensagem enviada!
-        </h3>
-        <p className="mt-1 text-sm text-platinum-400">
-          Obrigado pelo contato. Retorno o mais rápido possível.
-        </p>
+        <h3 className="mt-2 font-display text-lg font-semibold text-ice">{form.successTitle}</h3>
+        <p className="mt-1 text-sm text-platinum-400">{form.successDesc}</p>
       </div>
     );
   }
@@ -56,28 +55,16 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-lg space-y-3 text-left">
       <div className="grid gap-3 sm:grid-cols-2">
-        <input
-          name="name"
-          required
-          placeholder="Seu nome"
-          className={inputCls}
-        />
-        <input
-          name="email"
-          type="email"
-          required
-          placeholder="Seu e-mail"
-          className={inputCls}
-        />
+        <input name="name" required placeholder={form.namePlaceholder} className={inputCls} />
+        <input name="email" type="email" required placeholder={form.emailPlaceholder} className={inputCls} />
       </div>
       <textarea
         name="message"
         required
         rows={4}
-        placeholder="Conte sobre o projeto ou a oportunidade…"
+        placeholder={form.messagePlaceholder}
         className={`${inputCls} resize-none`}
       />
-      {/* honeypot anti-spam */}
       <input
         type="checkbox"
         name="botcheck"
@@ -94,19 +81,17 @@ export default function ContactForm() {
       >
         {status === "sending" ? (
           <>
-            <Loader2 size={16} className="animate-spin" /> Enviando…
+            <Loader2 size={16} className="animate-spin" /> {form.sending}
           </>
         ) : (
           <>
-            <Send size={15} /> Enviar mensagem
+            <Send size={15} /> {form.submit}
           </>
         )}
       </button>
 
       {status === "error" && (
-        <p className="text-center text-xs text-rose-400">
-          Não foi possível enviar agora. Tente outro canal abaixo.
-        </p>
+        <p className="text-center text-xs text-rose-400">{form.error}</p>
       )}
     </form>
   );

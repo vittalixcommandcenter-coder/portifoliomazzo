@@ -30,10 +30,10 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 export default function CVPage() {
   return (
-    <main className="cv-page mx-auto max-w-[820px] bg-white text-[11px] text-slate-700 shadow-xl print:shadow-none">
+    <main className="cv-page mx-auto max-w-[820px] bg-white text-[11px] text-slate-700 shadow-xl print:shadow-none sm:text-[11px]">
       {/* Cabeçalho com faixa de cor (slim) */}
       <header
-        className="relative overflow-hidden px-10 pb-5 pt-6 text-white"
+        className="relative overflow-hidden px-5 pb-5 pt-6 text-white sm:px-10"
         style={{ background: `linear-gradient(135deg, ${V}, ${VD})` }}
       >
         <div
@@ -42,7 +42,7 @@ export default function CVPage() {
           style={{ background: "rgba(255,255,255,0.09)" }}
         />
         <div className="relative">
-          <h1 className="font-display text-[26px] font-bold leading-tight tracking-tight">
+          <h1 className="font-display text-[20px] font-bold leading-tight tracking-tight sm:text-[26px]">
             Guilherme Augusto Mazzo de Oliveira
           </h1>
           <p className="mt-0.5 text-[14px] font-medium text-white/90">
@@ -57,7 +57,7 @@ export default function CVPage() {
         </div>
       </header>
 
-      <div className="px-10 py-6">
+      <div className="px-4 py-5 sm:px-10 sm:py-6">
         {/* Perfil */}
         <section>
           <SectionTitle>Perfil</SectionTitle>
@@ -109,7 +109,7 @@ export default function CVPage() {
         </section>
 
         {/* Duas colunas: Competências | (Formação + Diferencial) */}
-        <div className="mt-4 grid grid-cols-2 gap-6">
+        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <section className="break-inside-avoid">
             <SectionTitle>Competências técnicas</SectionTitle>
             <div className="space-y-1.5">

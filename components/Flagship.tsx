@@ -17,15 +17,15 @@ import {
 import Reveal from "./Reveal";
 import ProntuiaDemo from "./demo/ProntuiaDemo";
 import { flagship } from "@/lib/data";
+import { useI18n } from "@/lib/i18n";
 
-// Ícone por recurso (mesma ordem do array em data.ts)
 const featureIcons: LucideIcon[] = [
-  ShieldCheck, // Transcrição segura
-  FileSignature, // Assinatura ICP-Brasil
-  BrainCircuit, // Co-Piloto clínico
-  ScanSearch, // Visão de exames
-  MessageSquareText, // Follow-up
-  Layers, // Multi-tenant
+  ShieldCheck,
+  FileSignature,
+  BrainCircuit,
+  ScanSearch,
+  MessageSquareText,
+  Layers,
 ];
 
 const grid: Variants = {
@@ -43,23 +43,25 @@ const cell: Variants = {
 };
 
 export default function Flagship() {
+  const { t } = useI18n();
+  const fl = t.flagship;
+
   return (
-    <section id="prontuia" className="relative px-6 py-28 md:py-36">
+    <section id="prontuia" className="relative px-4 py-20 sm:px-6 sm:py-28 md:py-36">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-copper/30 bg-copper/[0.08] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-copper-soft">
                 <Star size={12} className="fill-copper-soft text-copper-soft" />
-                Carro-chefe
+                {fl.badge}
               </span>
               <h2 className="mt-4 font-display text-3xl font-semibold tracking-tightest text-platinum-gradient sm:text-4xl">
-                O produto que define o meu trabalho
+                {fl.sectionTitle}
               </h2>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-platinum-400">
-              O ProntuIA reúne tudo o que faço de melhor: segurança de nível
-              clínico, IA aplicada e UI/UX premium em um único SaaS.
+            <p className="max-w-sm text-sm leading-relaxed text-platinum-400 sm:max-w-xs">
+              {fl.sectionDesc}
             </p>
           </div>
         </Reveal>
@@ -70,8 +72,7 @@ export default function Flagship() {
             className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-copper/[0.08] blur-[100px]"
           />
 
-          {/* Bloco principal */}
-          <div className="glass-strong relative grid gap-12 rounded-[2rem] p-8 shadow-lift md:grid-cols-[1.1fr_1fr] md:p-14">
+          <div className="glass-strong relative grid gap-10 rounded-[1.5rem] p-6 shadow-lift sm:rounded-[2rem] sm:p-8 md:grid-cols-[1.1fr_1fr] md:gap-12 md:p-14">
             <div>
               <div className="flex items-center gap-3">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl border border-copper/25 bg-copper/[0.1]">
@@ -82,15 +83,11 @@ export default function Flagship() {
                 </span>
               </div>
 
-              <h2 className="mt-7 font-display text-5xl font-semibold tracking-tightest text-platinum-gradient md:text-6xl">
+              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tightest text-platinum-gradient sm:mt-7 sm:text-5xl md:text-6xl">
                 {flagship.name}
               </h2>
-              <p className="mt-3 text-lg font-light text-platinum-300">
-                {flagship.tagline}
-              </p>
-              <p className="mt-6 text-base leading-relaxed text-platinum-400">
-                {flagship.description}
-              </p>
+              <p className="mt-3 text-lg font-light text-platinum-300">{fl.tagline}</p>
+              <p className="mt-6 text-base leading-relaxed text-platinum-400">{fl.description}</p>
 
               <div className="mt-7 flex flex-wrap gap-2">
                 {flagship.stack.map((tech) => (
@@ -110,7 +107,7 @@ export default function Flagship() {
                   rel="noopener noreferrer"
                   className="btn-primary group"
                 >
-                  Visitar prontuia.com.br
+                  {fl.visitBtn}
                   <ArrowUpRight
                     size={16}
                     className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -120,7 +117,7 @@ export default function Flagship() {
             </div>
 
             <div className="flex flex-col justify-center gap-3">
-              {flagship.highlights.map((h, i) => (
+              {fl.highlights.map((h, i) => (
                 <motion.div
                   key={h.title}
                   initial={{ opacity: 0, y: 18 }}
@@ -134,12 +131,8 @@ export default function Flagship() {
                       <Check size={14} className="text-copper-soft" />
                     </div>
                     <div>
-                      <h3 className="font-display font-medium text-ice">
-                        {h.title}
-                      </h3>
-                      <p className="mt-1 text-sm leading-relaxed text-platinum-400">
-                        {h.text}
-                      </p>
+                      <h3 className="font-display font-medium text-ice">{h.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-platinum-400">{h.text}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -152,19 +145,17 @@ export default function Flagship() {
         <Reveal>
           <div className="mt-12 flex items-center gap-2.5">
             <span className="rounded-full border border-copper/30 bg-copper/[0.08] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-copper-soft">
-              Experimente
+              {fl.demoLabel}
             </span>
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
-              Demonstração interativa
+              {fl.demoEyebrow}
             </p>
           </div>
           <h3 className="mt-4 max-w-xl font-display text-2xl font-semibold tracking-tightest text-platinum-gradient sm:text-3xl">
-            Não acredite — interaja com o produto
+            {fl.demoTitle}
           </h3>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-platinum-400">
-            Uma recriação fiel do ProntuIA com dados fictícios. Navegue pelo
-            painel, faça uma consulta com SOAP e IA, explore a assinatura
-            ICP-Brasil e converse com a Vittalis.
+            {fl.demoDesc}
           </p>
         </Reveal>
 
@@ -174,10 +165,10 @@ export default function Flagship() {
           </div>
         </Reveal>
 
-        {/* Grade de recursos premium */}
+        {/* Grade de recursos */}
         <Reveal>
           <p className="mt-16 text-xs font-medium uppercase tracking-[0.25em] text-platinum-500">
-            Recursos que diferenciam
+            {fl.featuresEyebrow}
           </p>
         </Reveal>
 
@@ -188,7 +179,7 @@ export default function Flagship() {
           viewport={{ once: true, margin: "-60px" }}
           className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {flagship.features.map((f, i) => {
+          {fl.features.map((f, i) => {
             const Icon = featureIcons[i] ?? ShieldCheck;
             return (
               <motion.div key={f.title} variants={cell}>
@@ -196,12 +187,8 @@ export default function Flagship() {
                   <div className="grid h-10 w-10 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
                     <Icon size={18} className="text-copper-soft" />
                   </div>
-                  <h3 className="mt-4 font-display text-base font-medium text-ice">
-                    {f.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-platinum-400">
-                    {f.text}
-                  </p>
+                  <h3 className="mt-4 font-display text-base font-medium text-ice">{f.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-platinum-400">{f.text}</p>
                 </div>
               </motion.div>
             );

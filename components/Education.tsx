@@ -4,6 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import { GraduationCap, ShieldCheck, ArrowUpRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { education } from "@/lib/data";
+import { useI18n } from "@/lib/i18n";
 
 const grid: Variants = {
   hidden: {},
@@ -20,13 +21,16 @@ const cell: Variants = {
 };
 
 export default function Education() {
+  const { t } = useI18n();
+  const { education: edu } = t;
+
   return (
-    <section id="formacao" className="relative px-6 py-28 md:py-36">
+    <section id="formacao" className="relative px-4 py-20 sm:px-6 sm:py-28 md:py-36">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          eyebrow="Formação"
-          title="Educação & certificações"
-          description="Base acadêmica em desenvolvimento de sistemas, com foco também em proteção de dados."
+          eyebrow={edu.eyebrow}
+          title={edu.title}
+          description={edu.description}
         />
 
         <motion.div
@@ -36,10 +40,10 @@ export default function Education() {
           viewport={{ once: true, margin: "-60px" }}
           className="grid grid-cols-1 gap-3 sm:grid-cols-2"
         >
-          {education.map((e) => (
+          {edu.items.map((e, i) => (
             <motion.div key={e.title} variants={cell}>
               <a
-                href={e.url}
+                href={education[i]?.url ?? "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-glow group flex h-full flex-col rounded-2xl"
@@ -47,16 +51,16 @@ export default function Education() {
                 <div className="glass ring-hover flex h-full flex-col rounded-2xl p-6">
                   <div className="flex items-center justify-between">
                     <div className="grid h-11 w-11 place-items-center rounded-xl border border-copper/20 bg-copper/[0.08]">
-                      {e.type === "Graduação" ? (
+                      {i === 0 ? (
                         <GraduationCap size={20} className="text-copper-soft" />
                       ) : (
                         <ShieldCheck size={20} className="text-copper-soft" />
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      {e.current && (
+                      {education[i]?.current && (
                         <span className="rounded-full bg-copper/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-copper-soft">
-                          Em curso
+                          {edu.inProgress}
                         </span>
                       )}
                       <ArrowUpRight

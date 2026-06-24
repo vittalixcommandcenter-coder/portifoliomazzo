@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { processSteps } from "@/lib/data";
+import { useI18n } from "@/lib/i18n";
 
 const grid: Variants = {
   hidden: {},
@@ -19,13 +19,16 @@ const cell: Variants = {
 };
 
 export default function Process() {
+  const { t } = useI18n();
+  const { process: proc } = t;
+
   return (
-    <section id="processo" className="relative px-6 py-28 md:py-36">
+    <section id="processo" className="relative px-4 py-20 sm:px-6 sm:py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Processo"
-          title="Como eu trabalho"
-          description="Do problema ao produto no ar — um método claro que prioriza resolver, escalar e refinar."
+          eyebrow={proc.eyebrow}
+          title={proc.title}
+          description={proc.description}
         />
 
         <motion.div
@@ -35,23 +38,17 @@ export default function Process() {
           viewport={{ once: true, margin: "-60px" }}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {processSteps.map((s, i) => (
+          {proc.steps.map((s, i) => (
             <motion.div key={s.n} variants={cell} className="relative">
               <div className="glass ring-hover h-full rounded-2xl p-6">
                 <div className="flex items-center gap-3">
-                  <span className="font-display text-3xl font-bold text-copper/30">
-                    {s.n}
-                  </span>
-                  {i < processSteps.length - 1 && (
+                  <span className="font-display text-3xl font-bold text-copper/30">{s.n}</span>
+                  {i < proc.steps.length - 1 && (
                     <span className="hidden h-px flex-1 bg-gradient-to-r from-copper/30 to-transparent lg:block" />
                   )}
                 </div>
-                <h3 className="mt-4 font-display text-lg font-semibold text-ice">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-platinum-400">
-                  {s.text}
-                </p>
+                <h3 className="mt-4 font-display text-lg font-semibold text-ice">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-platinum-400">{s.text}</p>
               </div>
             </motion.div>
           ))}

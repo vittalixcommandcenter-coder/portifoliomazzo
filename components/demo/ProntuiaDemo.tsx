@@ -94,7 +94,7 @@ export default function ProntuiaDemo() {
         <span className="w-9" />
       </div>
 
-      <div className="flex min-h-[480px]">
+      <div className="flex min-h-[420px] sm:min-h-[480px] md:min-h-[560px]">
         {/* Sidebar (clara, estilo Apple) */}
         <aside className="flex w-14 flex-col border-r border-black/[0.06] bg-white/90 py-3 backdrop-blur sm:w-[200px] sm:px-2.5">
           {/* perfil */}

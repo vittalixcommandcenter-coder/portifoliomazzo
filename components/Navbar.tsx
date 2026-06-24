@@ -3,12 +3,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { navLinks, socials } from "@/lib/data";
+import { socials } from "@/lib/data";
+import { useI18n } from "@/lib/i18n";
+import LangToggle from "./LangToggle";
 import ThemeToggle from "./ThemeToggle";
+
+const navKeys = ["about", "prontuia", "projects", "tech", "process", "education", "contact"] as const;
+const navHrefs = ["#sobre", "#prontuia", "#projetos", "#stack", "#processo", "#formacao", "#contato"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -16,6 +22,8 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const navLinks = navKeys.map((key, i) => ({ label: t.nav[key], href: navHrefs[i] }));
 
   return (
     <motion.header
@@ -25,13 +33,13 @@ export default function Navbar() {
       className="fixed inset-x-0 top-0 z-50 px-4 pt-4"
     >
       <nav
-        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 ${
+        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full px-4 py-2 transition-all duration-500 sm:px-5 sm:py-2.5 ${
           scrolled ? "glass-strong" : "glass"
         }`}
       >
         <a
           href="#topo"
-          className="font-display text-base font-semibold tracking-tightest text-ice"
+          className="font-display text-sm font-semibold tracking-tightest text-ice sm:text-base"
         >
           Guilherme Mazzo
         </a>
@@ -50,18 +58,19 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1">
+          <LangToggle />
           <ThemeToggle />
           <a
             href={`mailto:${socials.email}`}
             className="hidden rounded-full bg-copper px-4 py-1.5 text-[13px] font-medium text-graphite-950 transition-colors hover:bg-copper-soft md:inline-block"
           >
-            Contato
+            {t.nav.contactBtn}
           </a>
 
           {/* Mobile toggle */}
           <button
-            aria-label="Abrir menu"
+            aria-label={t.nav.openMenu}
             onClick={() => setOpen((v) => !v)}
             className="grid h-9 w-9 place-items-center rounded-full text-platinum-200 transition-colors hover:bg-white/[0.06] md:hidden"
           >
