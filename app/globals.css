@@ -212,14 +212,26 @@ body:has(.cv-page)::after {
   .no-print {
     display: none !important;
   }
+  /* margin: 0 remove os cabeçalhos/rodapés automáticos do navegador
+     (data, hora, URL, número de página). As margens vêm do padding interno. */
   @page {
-    margin: 14mm;
+    margin: 0;
+    size: A4;
   }
   .cv-page {
     max-width: 100% !important;
+    box-shadow: none !important;
   }
+  /* O cabeçalho colorido vai até a borda; o conteúdo tem padding próprio. */
+  html,
   body {
     background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 
